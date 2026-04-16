@@ -1,0 +1,69 @@
+{
+  "HomePage": {
+    "title": "COMA",
+    "subtitle": "Church Operations Management App",
+    "description": "A centralized digital ecosystem to manage church operations easily, transparently, and measurably.",
+    "modules": {
+      "app": {
+        "title": "App Management",
+        "desc": "Manage the app's core settings, user roles, permissions, and church profile information."
+      },
+      "member": {
+        "title": "Member Management",
+        "desc": "Manage congregation database, membership status, ministry history, and cell group growth."
+      },
+      "finance": {
+        "title": "Finance Management",
+        "desc": "Automated tithe recording system, expense management, and church financial reporting."
+      },
+      "inventory": {
+        "title": "Inventory Management",
+        "desc": "Monitor church asset inventory, facility maintenance schedules, and item borrowing systems."
+      },
+      "service": {
+        "title": "Service Management",
+        "desc": "Schedule weekly services, assign ministry volunteers, and organize worship plans."
+      },
+      "event": {
+        "title": "Event Management",
+        "desc": "Registration system for special events, discipleship classes, retreats, and ticketing."
+      }
+    },
+    "footer_quote": "\"For where two or three gather in my name, there am I with them.\"",
+    "footer_est": "Est. 2026 • Soli Deo Gloria"
+  },
+  "Auth": {
+    "login_title": "Log in to COMA",
+    "login_subtitle": "Enter your church code and credentials.",
+    "register_title": "Register Church",
+    "register_subtitle": "Create a digital space for your church today.",
+    "church_code": "Church Code (Unique)",
+    "email": "Email Address",
+    "password": "Password",
+    "church_name": "Church Name",
+    "admin_name": "Admin Name",
+    "btn_login": "Sign In",
+    "btn_register": "Register Now",
+    "forgot_password": "Forgot password?",
+    "no_account": "Haven't registered your church?",
+    "have_account": "Already have a church account?"
+  },
+  "MemberManagementsPage": {
+    "title": "Member Management",
+    "description": "Command center for managing congregation data, attendance, and church organizational structure.",
+    "menus": {
+      "directory": {
+        "title": "Member Directory",
+        "desc": "Add, edit, delete, and manage the entire congregation database."
+      },
+      "attendance": {
+        "title": "Member Attendance",
+        "desc": "Manage service attendance, recaps, and attendance reports."
+      },
+      "structure": {
+        "title": "Structure Management",
+        "desc": "Set positions, ministry roles, and church organizational hierarchy."
+      }
+    }
+  }
+}

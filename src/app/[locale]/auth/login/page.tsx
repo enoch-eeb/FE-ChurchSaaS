@@ -1,0 +1,130 @@
+"use client";
+
+import { useTranslations, useLocale } from "next-intl";
+import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { LocaleToggle } from "@/components/locale-toggle";
+
+export default function LoginPage() {
+  const t = useTranslations("Auth");
+  const locale = useLocale();
+  const router = useRouter();
+  
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError("");
+
+    const formData = new FormData(e.currentTarget);
+    const payload = Object.fromEntries(formData);
+
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Gagal login");
+      }
+
+      router.push(`/${locale}/managements/member-managements`);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    // Wrapper diubah jadi flex-col supaya bisa nampung header di atas
+    <div className="min-h-screen flex flex-col bg-background transition-colors duration-300">
+      
+      {/* TOP HEADER KHUSUS LOGIN */}
+      <header className="flex justify-end items-center p-6 px-8 gap-4">
+        <LocaleToggle />
+        <ThemeToggle />
+      </header>
+
+      {/* KONTEN LOGIN (Tetap di tengah) */}
+      <div className="flex-1 flex items-center justify-center p-4 pb-20">
+        <div className="w-full max-w-md p-8 bg-bg-alt border border-border/60 rounded-[8px] shadow-xl">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-black italic text-primary font-mono tracking-tighter">COMA.</h1>
+            <h2 className="text-xl font-bold mt-4">{t("login_title")}</h2>
+            <p className="text-text-muted text-sm mt-1">{t("login_subtitle")}</p>
+          </div>
+
+          {error && (
+            <div className="mb-4 p-3 bg-red-500/10 border border-red-500/50 text-red-600 rounded-[8px] text-sm text-center">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium mb-1 text-primary">{t("church_code")}</label>
+              <input 
+                name="churchCode"
+                type="text" 
+                required
+                className="w-full p-3 bg-background border border-border rounded-[8px] focus:outline-none focus:border-primary transition-colors uppercase"
+                placeholder="e.g. GBI-123"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1 text-primary">{t("email")}</label>
+              <input 
+                name="email"
+                type="email" 
+                required
+                className="w-full p-3 bg-background border border-border rounded-[8px] focus:outline-none focus:border-primary transition-colors"
+                placeholder="admin@church.com"
+              />
+            </div>
+
+            <div>
+              <div className="flex justify-between items-center mb-1">
+                <label className="block text-sm font-medium text-primary">{t("password")}</label>
+                <Link href="/auth/forgot-password" className="text-xs text-accent hover:text-primary transition-colors font-medium">
+                  {t("forgot_password")}
+                </Link>
+              </div>
+              <input 
+                name="password"
+                type="password" 
+                required
+                className="w-full p-3 bg-background border border-border rounded-[8px] focus:outline-none focus:border-primary transition-colors"
+                placeholder="••••••••"
+              />
+            </div>
+
+            <button 
+              type="submit" 
+              disabled={isLoading}
+              className="w-full bg-primary text-primary-foreground py-3 rounded-lg font-bold hover:opacity-90 transition-opacity mt-4 disabled:opacity-50 cursor-pointer"
+            >
+              {isLoading ? "Loading..." : t("btn_login")}
+            </button>
+          </form>
+
+          <p className="text-center text-sm text-text-muted mt-6">
+            {t("no_account")}{" "}
+            <Link href="/auth/register" className="text-primary font-bold hover:underline">
+              {t("btn_register")}
+            </Link>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}

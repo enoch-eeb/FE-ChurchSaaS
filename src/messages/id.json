@@ -1,0 +1,69 @@
+{
+  "HomePage": {
+    "title": "COMA",
+    "subtitle": "Church Operations Management App",
+    "description": "Satu ekosistem digital terpusat untuk mengelola operasional gereja dengan lebih mudah, transparan, dan terukur.",
+    "modules": {
+      "app": {
+        "title": "App Management",
+          "desc": "Manage the app's core settings, user roles, permissions, and church profile information."
+        },
+      "member": {
+        "title": "Member Management",
+        "desc": "Kelola basis data jemaat, status keanggotaan, histori pelayanan, dan pertumbuhan komunitas sel grup."
+      },
+      "finance": {
+        "title": "Finance Management",
+        "desc": "Sistem pencatatan persembahan, manajemen pengeluaran, dan pelaporan keuangan gereja secara otomatis."
+      },
+      "inventory": {
+        "title": "Inventory Management",
+        "desc": "Pantau inventaris aset gereja, jadwal pemeliharaan fasilitas, dan sistem peminjaman barang."
+      },
+      "service": {
+        "title": "Service Management",
+        "desc": "Jadwalkan ibadah mingguan, pembagian tugas pelayan Tuhan, dan pengaturan tata ibadah."
+      },
+      "event": {
+        "title": "Event Management",
+        "desc": "Sistem registrasi untuk acara khusus, kelas pembinaan (komsel), retreat, dan penjualan tiket."
+      }
+    },
+    "footer_quote": "\"Sebab di mana dua atau tiga orang berkumpul dalam Nama-Ku, di situ Aku ada di tengah-tengah mereka.\"",
+    "footer_est": "Est. 2026 • Soli Deo Gloria"
+  },
+  "Auth": {
+    "login_title": "Masuk ke COMA",
+    "login_subtitle": "Masukkan kode gereja dan kredensial Anda.",
+    "register_title": "Daftarkan Gereja",
+    "register_subtitle": "Buat ruang digital untuk gereja Anda sekarang.",
+    "church_code": "Kode Gereja (Unik)",
+    "email": "Alamat Email",
+    "password": "Kata Sandi",
+    "church_name": "Nama Gereja",
+    "admin_name": "Nama Admin",
+    "btn_login": "Masuk",
+    "btn_register": "Daftar Sekarang",
+    "forgot_password": "Lupa kata sandi?",
+    "no_account": "Belum mendaftarkan gereja?",
+    "have_account": "Sudah punya akun gereja?"
+  },
+  "MemberManagementsPage": {
+    "title": "Member Management",
+    "description": "Pusat kendali untuk mengelola data jemaat, absensi, dan struktur organisasi gereja.",
+    "menus": {
+      "directory": {
+        "title": "Daftar Member",
+        "desc": "Tambah, edit, hapus, dan kelola database seluruh jemaat."
+      },
+      "attendance": {
+        "title": "Absen Member",
+        "desc": "Kelola absensi ibadah, rekapitulasi kehadiran, dan laporan."
+      },
+      "structure": {
+        "title": "Structure Management",
+        "desc": "Atur jabatan, peran pelayanan, dan hierarki organisasi gereja."
+      }
+    }
+  }
+}

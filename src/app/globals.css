@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+:root {
+  /* --- LIGHT MODE --- */
+  --background: #e9f1f1;
+  --foreground: #121c1b;
+  
+  --primary: #365454;
+  --primary-foreground: #ffffff;
+  
+  --secondary: #96a5bb;
+  --secondary-foreground: #121c1b;
+  
+  --accent: #5a648c;
+  --accent-foreground: #ffffff;
+
+  /* Analogous / Tints for Light Mode */
+  --bg-soft: #f1f7f7;
+  --text-muted: #4a5a59;
+  --border: #d1dada;
+}
+
+.dark {
+  /* --- DARK MODE --- */
+  --background: #0e1616;
+  --foreground: #e3edec;
+
+  --primary: #abc9c9;
+  --primary-foreground: #0e1616;
+
+  --secondary: #445369;
+  --secondary-foreground: #e3edec;
+
+  --accent: #737da5;
+  --accent-foreground: #ffffff;
+
+  /* Analogous Tints & Shades (Sesuai List Kamu) */
+  --bg-alt-1: #0d1517;
+  --bg-alt-2: #0d1417;
+  --bg-alt-3: #0d1217;
+  
+  --text-alt-1: #e2eced;
+  --text-alt-2: #e2eaee;
+  --text-alt-3: #e2e9ee;
+
+  --border: #1a2626;
+}
+
+@theme inline {
+  /* Menghubungkan variabel CSS ke utility class Tailwind */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  /* Analogous Classes */
+  --color-bg-alt: var(--bg-alt-1);
+  --color-text-muted: var(--text-alt-1);
+  --color-border: var(--border);
+}
+
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: Arial, Helvetica, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+  }
+}
