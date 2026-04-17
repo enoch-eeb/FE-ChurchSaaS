@@ -10,7 +10,6 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
     const body = await req.json();
     const cookieStore = await cookies();
     
-    // Pastikan menggunakan coma_token, BUKAN "tokens"
     const token = cookieStore.get("coma_token")?.value;
 
     const res = await fetch(`${BE_URL}/${id}`, {
