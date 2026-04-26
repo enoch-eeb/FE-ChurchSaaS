@@ -35,18 +35,24 @@
   "Auth": {
     "login_title": "Log in to COMA",
     "login_subtitle": "Enter your church code and credentials.",
-    "register_title": "Register Church",
-    "register_subtitle": "Create a digital space for your church today.",
     "church_code": "Church Code (Unique)",
     "email": "Email Address",
     "password": "Password",
-    "church_name": "Church Name",
-    "admin_name": "Admin Name",
-    "btn_login": "Sign In",
-    "btn_register": "Register Now",
     "forgot_password": "Forgot password?",
+    "btn_login": "Sign In",
     "no_account": "Haven't registered your church?",
-    "have_account": "Already have a church account?"
+    "btn_register": "Register Now",
+    "loading": "Loading...",
+    "btn_logout": "Logout",
+    "forgot_password_title": "Forgot Password?",
+    "forgot_password_subtitle": "Enter your email and we'll send you a link to reset your password.",
+    "send_reset_link": "Send Reset Link",
+    "back_to_login": "Back to Login",
+    "reset_password_title": "Create New Password",
+    "reset_password_subtitle": "Please enter your new password below.",
+    "new_password": "New Password",
+    "confirm_password": "Confirm Password",
+    "btn_reset_password": "Save New Password"
   },
   "MemberManagementsPage": {
     "title": "Member Management",
@@ -64,6 +70,102 @@
         "title": "Structure Management",
         "desc": "Set positions, ministry roles, and church organizational hierarchy."
       }
+    },
+    "AttendancePage": {
+      "title": "Attendance",
+      "description": "Manage attendance, event sessions, and congregation analysis.",
+      "selectPlaceholder": "Select Event Session...",
+      "createSession": "Create Session",
+      "qrCode": "QR Code",
+      "noEventWarning": "System locked. Select or create an Event Session to start attendance.",
+      "tabs": {
+        "attendance": "Attendance",
+        "followup": "Follow-up",
+        "analysis": "Analysis"
+      },
+      "attendance": {
+        "searchPlaceholder": "Search member name...",
+        "present": "present",
+        "exportCsv": "Export CSV",
+        "loading": "Loading data...",
+        "empty": "No member data yet.",
+        "emptySearch": "No results found for \"{query}\"",
+        "alreadyPresent": "Present",
+        "markPresent": "Mark Present",
+        "table": {
+          "no": "No",
+          "name": "Name",
+          "phone": "Phone",
+          "action": "Attendance Action"
+        }
+      },
+      "followup": {
+        "title": "Members Need Follow-up",
+        "description": "Absent 3 or more times consecutively in all recorded sessions.",
+        "badge": "{count} members",
+        "loading": "Loading member data...",
+        "notEnoughData": "Insufficient Data",
+        "notEnoughDataDesc": "At least 3 event sessions are required for follow-up reports.",
+        "allActive": "All members are active!",
+        "allActiveDesc": "No members need follow-up at this time.",
+        "absences": "Absences",
+        "whatsapp": "WhatsApp"
+      },
+      "analysis": {
+        "stats": {
+          "totalSessions": "Total Sessions",
+          "totalMembers": "Total Members",
+          "presentThisSession": "Present This Session",
+          "needFollowup": "Need Follow-up"
+        },
+        "perSession": {
+          "title": "Attendance Per Session",
+          "description": "Number of attendees from each event session.",
+          "empty": "No event sessions yet.",
+          "present": "present"
+        },
+        "mostActive": {
+          "title": "Most Active Members",
+          "description": "Attendance ranking from all recorded event sessions.",
+          "loading": "Loading data...",
+          "empty": "No attendance data to display.",
+          "sessions": "/{total} sessions",
+          "rate": "{rate}% present"
+        }
+      },
+      "modal": {
+        "title": "Create New Event Session",
+        "label": "Session Name / Service",
+        "placeholder": "e.g., Sunday Service - April 26, 2026",
+        "submit": "Save & Start Attendance"
+      },
+      "csv": {
+        "eventName": "Event Name",
+        "date": "Date",
+        "memberId": "Member ID",
+        "fullName": "Full Name",
+        "phone": "Phone Number",
+        "status": "Status",
+        "present": "Present",
+        "absent": "Absent"
+      }
+    },
+    "directory": {
+      "title": "Member Directory",
+      "description": "Manage all church congregation data in one place.",
+      "btn_add": "Add Member",
+      "search_placeholder": "Search member...",
+      "table": {
+        "id": "ID",
+        "name": "Name",
+        "contact": "Contact",
+        "status": "Status",
+        "action": "Action"
+      },
+      "status_active": "Active",
+      "total_member": "Total members",
+      "loading": "Loading data...",
+      "no_data": "No members found."
     }
   }
 }

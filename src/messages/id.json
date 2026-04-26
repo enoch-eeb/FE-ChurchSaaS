@@ -35,35 +35,137 @@
   "Auth": {
     "login_title": "Masuk ke COMA",
     "login_subtitle": "Masukkan kode gereja dan kredensial Anda.",
-    "register_title": "Daftarkan Gereja",
-    "register_subtitle": "Buat ruang digital untuk gereja Anda sekarang.",
     "church_code": "Kode Gereja (Unik)",
     "email": "Alamat Email",
     "password": "Kata Sandi",
-    "church_name": "Nama Gereja",
-    "admin_name": "Nama Admin",
-    "btn_login": "Masuk",
-    "btn_register": "Daftar Sekarang",
     "forgot_password": "Lupa kata sandi?",
-    "no_account": "Belum mendaftarkan gereja?",
-    "have_account": "Sudah punya akun gereja?"
+    "btn_login": "Masuk",
+    "no_account": "Belum mendaftarkan gereja Anda?",
+    "btn_register": "Daftar Sekarang",
+    "loading": "Memproses...",
+    "btn_logout": "Keluar",
+    "forgot_password_title": "Lupa Kata Sandi?",
+    "forgot_password_subtitle": "Masukkan email Anda dan kami akan mengirimkan tautan untuk mengatur ulang kata sandi.",
+    "send_reset_link": "Kirim Tautan Reset",
+    "back_to_login": "Kembali ke halaman Login",
+    "reset_password_title": "Buat Kata Sandi Baru",
+    "reset_password_subtitle": "Silakan masukkan kata sandi baru Anda di bawah ini.",
+    "new_password": "Kata Sandi Baru",
+    "confirm_password": "Konfirmasi Kata Sandi",
+    "btn_reset_password": "Simpan Kata Sandi Baru"
   },
   "MemberManagementsPage": {
-    "title": "Member Management",
+    "title": "Manajemen Anggota",
     "description": "Pusat kendali untuk mengelola data jemaat, absensi, dan struktur organisasi gereja.",
     "menus": {
       "directory": {
-        "title": "Daftar Member",
-        "desc": "Tambah, edit, hapus, dan kelola database seluruh jemaat."
+        "title": "Direktori Jemaat",
+        "desc": "Tambah, edit, hapus, dan kelola seluruh database jemaat."
       },
       "attendance": {
-        "title": "Absen Member",
-        "desc": "Kelola absensi ibadah, rekapitulasi kehadiran, dan laporan."
+        "title": "Absensi Jemaat",
+        "desc": "Kelola kehadiran ibadah, rekapitulasi, dan laporan absensi."
       },
       "structure": {
-        "title": "Structure Management",
-        "desc": "Atur jabatan, peran pelayanan, dan hierarki organisasi gereja."
+        "title": "Manajemen Struktur",
+        "desc": "Atur jabatan, peran kementerian, dan hierarki organisasi gereja."
       }
+    },
+    "AttendancePage": {
+      "title": "Absensi",
+      "description": "Kelola kehadiran, sesi event, dan analisis jemaat.",
+      "selectPlaceholder": "Pilih Sesi Event...",
+      "createSession": "Buat Sesi",
+      "qrCode": "QR Code",
+      "noEventWarning": "Sistem terkunci. Pilih atau buat Sesi Event untuk mulai melakukan absensi.",
+      "tabs": {
+        "attendance": "Absensi",
+        "followup": "Follow-up",
+        "analysis": "Analisis"
+      },
+      "attendance": {
+        "searchPlaceholder": "Cari nama jemaat...",
+        "present": "hadir",
+        "exportCsv": "Ekspor CSV",
+        "loading": "Memuat data...",
+        "empty": "Belum ada data jemaat.",
+        "emptySearch": "Tidak ada hasil untuk \"{query}\"",
+        "alreadyPresent": "Hadir",
+        "markPresent": "Tandai Hadir",
+        "table": {
+          "no": "No",
+          "name": "Nama",
+          "phone": "Telepon",
+          "action": "Aksi Kehadiran"
+        }
+      },
+      "followup": {
+        "title": "Jemaat Perlu Follow-up",
+        "description": "Tidak hadir 3 kali atau lebih berturut-turut di semua sesi tercatat.",
+        "badge": "{count} jemaat",
+        "loading": "Memuat data jemaat...",
+        "notEnoughData": "Data belum cukup",
+        "notEnoughDataDesc": "Minimal 3 sesi event diperlukan untuk laporan follow-up.",
+        "allActive": "Semua jemaat aktif!",
+        "allActiveDesc": "Tidak ada jemaat yang perlu di-follow-up saat ini.",
+        "absences": "Absen",
+        "whatsapp": "WhatsApp"
+      },
+      "analysis": {
+        "stats": {
+          "totalSessions": "Total Sesi",
+          "totalMembers": "Total Jemaat",
+          "presentThisSession": "Hadir Sesi Ini",
+          "needFollowup": "Perlu Follow-up"
+        },
+        "perSession": {
+          "title": "Kehadiran Per Sesi",
+          "description": "Jumlah jemaat hadir dari setiap sesi event.",
+          "empty": "Belum ada sesi event.",
+          "present": "hadir"
+        },
+        "mostActive": {
+          "title": "Jemaat Paling Aktif",
+          "description": "Peringkat kehadiran dari seluruh sesi event tercatat.",
+          "loading": "Memuat data...",
+          "empty": "Belum ada data kehadiran untuk ditampilkan.",
+          "sessions": "/{total} sesi",
+          "rate": "{rate}% hadir"
+        }
+      },
+      "modal": {
+        "title": "Buat Sesi Event Baru",
+        "label": "Nama Sesi / Ibadah",
+        "placeholder": "Misal: Ibadah Raya - 26 April 2026",
+        "submit": "Simpan & Mulai Absensi"
+      },
+      "csv": {
+        "eventName": "Nama Event",
+        "date": "Tanggal",
+        "memberId": "ID Anggota",
+        "fullName": "Nama Lengkap",
+        "phone": "Nomor Telepon",
+        "status": "Status",
+        "present": "Hadir",
+        "absent": "Absen"
+      }
+    },
+    "directory": {
+      "title": "Direktori Jemaat",
+      "description": "Kelola data seluruh jemaat gereja dalam satu tempat.",
+      "btn_add": "Tambah Jemaat",
+      "search_placeholder": "Cari jemaat...",
+      "table": {
+        "id": "ID",
+        "name": "Nama",
+        "contact": "Kontak",
+        "status": "Status",
+        "action": "Aksi"
+      },
+      "status_active": "Aktif",
+      "total_member": "Total jemaat",
+      "loading": "Memuat data...",
+      "no_data": "Tidak ada jemaat ditemukan."
     }
   }
 }
