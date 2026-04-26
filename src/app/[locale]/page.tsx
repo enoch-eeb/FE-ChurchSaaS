@@ -3,21 +3,33 @@
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { TopHeader } from '@/components/top-header';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 export default function HomePage() {
   const t = useTranslations('HomePage');
   const params = useParams();
   const locale = (params?.locale as string) || 'id';
+  const router = useRouter();
 
   const modules = [
-    { id: 'app', href: `/${locale}/auth/login` },
-    { id: 'member', href: `/${locale}/auth/login` },
-    { id: 'finance', href: `/${locale}/auth/login` },
-    { id: 'inventory', href: `/${locale}/auth/login` },
-    { id: 'service', href: `/${locale}/auth/login` },
-    { id: 'event', href: `/${locale}/auth/login` },
+    { id: 'app',       href: `/${locale}/managements/app-managements` },
+    { id: 'member',    href: `/${locale}/managements/member-managements` },
+    { id: 'finance',   href: `/${locale}/managements/finance-managements` },
+    { id: 'inventory', href: `/${locale}/managements/inventory-managements` },
+    { id: 'service',   href: `/${locale}/managements/service-managements` },
+    { id: 'event',     href: `/${locale}/managements/event-managements` },
   ];
+
+  const handleModuleClick = (e: React.MouseEvent, href: string) => {
+    e.preventDefault();
+    const token = localStorage.getItem('token');
+    console.log("Token di localStorage:", token);
+    if (token) {
+      router.push(href);
+    } else {
+      router.push(`/${locale}/auth/login`);
+    }
+  };
 
   return (
     <main className="min-h-screen bg-background text-foreground transition-colors duration-300 flex flex-col">
@@ -51,9 +63,10 @@ export default function HomePage() {
         {/* Bento Grid Layout */}
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 pb-10">
           {modules.map((m) => (
-            <Link 
+            <Link
               href={m.href}
               key={m.id}
+              onClick={(e) => handleModuleClick(e, m.href)}
               className="group p-10 rounded-lg bg-secondary/10 border border-border/60 hover:border-primary hover:bg-secondary/20 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 flex flex-col justify-center min-h-55"
             >
               <div>

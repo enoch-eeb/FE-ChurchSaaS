@@ -6,14 +6,16 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { LocaleToggle } from "@/components/locale-toggle";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function LoginPage() {
   const t = useTranslations("Auth");
   const locale = useLocale();
   const router = useRouter();
-  
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,7 +26,7 @@ export default function LoginPage() {
     const payload = Object.fromEntries(formData);
 
     try {
-      const res = await fetch("/api/auth/login", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -36,7 +38,12 @@ export default function LoginPage() {
         throw new Error(data.message || "Gagal login");
       }
 
-      router.push(`/${locale}/managements/member-managements`);
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        document.cookie = `coma_token=${data.token}; path=/; max-age=${60 * 60 * 24}`;
+      }
+
+      router.push(`/${locale}`);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -45,16 +52,15 @@ export default function LoginPage() {
   };
 
   return (
-    // Wrapper diubah jadi flex-col supaya bisa nampung header di atas
     <div className="min-h-screen flex flex-col bg-background transition-colors duration-300">
-      
+
       {/* TOP HEADER KHUSUS LOGIN */}
       <header className="flex justify-end items-center p-6 px-8 gap-4">
         <LocaleToggle />
         <ThemeToggle />
       </header>
 
-      {/* KONTEN LOGIN (Tetap di tengah) */}
+      {/* KONTEN LOGIN */}
       <div className="flex-1 flex items-center justify-center p-4 pb-20">
         <div className="w-full max-w-md p-8 bg-bg-alt border border-border/60 rounded-[8px] shadow-xl">
           <div className="text-center mb-8">
@@ -72,9 +78,9 @@ export default function LoginPage() {
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
               <label className="block text-sm font-medium mb-1 text-primary">{t("church_code")}</label>
-              <input 
+              <input
                 name="churchCode"
-                type="text" 
+                type="text"
                 required
                 className="w-full p-3 bg-background border border-border rounded-[8px] focus:outline-none focus:border-primary transition-colors uppercase"
                 placeholder="e.g. GBI-123"
@@ -83,9 +89,9 @@ export default function LoginPage() {
 
             <div>
               <label className="block text-sm font-medium mb-1 text-primary">{t("email")}</label>
-              <input 
+              <input
                 name="email"
-                type="email" 
+                type="email"
                 required
                 className="w-full p-3 bg-background border border-border rounded-[8px] focus:outline-none focus:border-primary transition-colors"
                 placeholder="admin@church.com"
@@ -95,21 +101,34 @@ export default function LoginPage() {
             <div>
               <div className="flex justify-between items-center mb-1">
                 <label className="block text-sm font-medium text-primary">{t("password")}</label>
-                <Link href={`/${locale}/auth/forgot-password`} className="text-xs text-accent hover:text-primary transition-colors font-medium">
+                <Link
+                  href={`/${locale}/auth/forgot-password`}
+                  className="text-xs text-accent hover:text-primary transition-colors font-medium"
+                >
                   {t("forgot_password")}
                 </Link>
               </div>
-              <input 
-                name="password"
-                type="password" 
-                required
-                className="w-full p-3 bg-background border border-border rounded-[8px] focus:outline-none focus:border-primary transition-colors"
-                placeholder="••••••••"
-              />
+              <div className="relative">
+                <input
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  required
+                  className="w-full p-3 pr-11 bg-background border border-border rounded-[8px] focus:outline-none focus:border-primary transition-colors"
+                  placeholder="••••••••"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-primary transition-colors"
+                  tabIndex={-1}
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
             </div>
 
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               disabled={isLoading}
               className="w-full bg-primary text-primary-foreground py-3 rounded-lg font-bold hover:opacity-90 transition-opacity mt-4 disabled:opacity-50 cursor-pointer"
             >
