@@ -8,7 +8,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: "Semua kolom wajib diisi" }, { status: 400 });
     }
 
-    const beResponse = await fetch("http://localhost:5000/api/auth/register", {
+    const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, "") || "http://localhost:3000";
+    const BE_URL = `${BASE_URL}/api/v1/auth/register`;
+
+    const beResponse = await fetch(BE_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -27,6 +30,7 @@ export async function POST(request: Request) {
     }, { status: 201 });
 
   } catch (error: any) {
+    console.error("ERROR PROXY REGISTER:", error);
     return NextResponse.json({ message: "Terjadi kesalahan server internal" }, { status: 500 });
   }
 }

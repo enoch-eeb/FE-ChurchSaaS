@@ -7,8 +7,8 @@ const intlMiddleware = createMiddleware({
   localePrefix: 'always'
 });
 
-export default function middleware(req: NextRequest) {
-  const token = req.cookies.get('coma_token')?.value; 
+export default function proxy(req: NextRequest) {
+  const token = req.cookies.get('coma_token')?.value;
   const { pathname } = req.nextUrl;
 
   if (pathname.includes('/managements') && !token) {
@@ -25,5 +25,6 @@ export default function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next|.*\\..*).*)']
+  matcher: ['/((?!api|_next|.*\\..*).*)'
+  ]
 };

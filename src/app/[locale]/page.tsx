@@ -1,19 +1,22 @@
+"use client";
+
 import { useTranslations } from 'next-intl';
-import { ThemeToggle } from "@/components/theme-toggle";
 import Link from 'next/link';
-import { LocaleToggle } from '@/components/locale-toggle';
 import { TopHeader } from '@/components/top-header';
+import { useParams } from 'next/navigation';
 
 export default function HomePage() {
   const t = useTranslations('HomePage');
+  const params = useParams();
+  const locale = (params?.locale as string) || 'id';
 
   const modules = [
-    { id: 'app', href: '/managements/app' },
-    { id: 'member', href: '/managements/member-managements' },
-    { id: 'finance', href: '/managements/finance' },
-    { id: 'inventory', href: '/managements/inventory' },
-    { id: 'service', href: '/managements/service' },
-    { id: 'event', href: '/managements/event' },
+    { id: 'app', href: `/${locale}/auth/login` },
+    { id: 'member', href: `/${locale}/auth/login` },
+    { id: 'finance', href: `/${locale}/auth/login` },
+    { id: 'inventory', href: `/${locale}/auth/login` },
+    { id: 'service', href: `/${locale}/auth/login` },
+    { id: 'event', href: `/${locale}/auth/login` },
   ];
 
   return (

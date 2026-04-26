@@ -23,11 +23,19 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: data.message || "Kredensial tidak valid" }, { status: beResponse.status });
     }
 
+    // Swagger BE mengembalikan token di root: { token: "..." }
+    // Guard: pastikan token ada sebelum set cookie
+    const token = data.token ?? data.data?.token;
+    if (!token) {
+      console.error("ERROR PROXY LOGIN: Token tidak ditemukan di response BE", data);
+      return NextResponse.json({ message: "Token tidak diterima dari server" }, { status: 500 });
+    }
+
     const response = NextResponse.json({ success: true, data: data }, { status: 200 });
 
     response.cookies.set({
       name: "coma_token",
-      value: data.token,
+      value: token,
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",

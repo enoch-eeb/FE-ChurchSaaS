@@ -95,7 +95,7 @@ export default function LoginPage() {
             <div>
               <div className="flex justify-between items-center mb-1">
                 <label className="block text-sm font-medium text-primary">{t("password")}</label>
-                <Link href="/auth/forgot-password" className="text-xs text-accent hover:text-primary transition-colors font-medium">
+                <Link href={`/${locale}/auth/forgot-password`} className="text-xs text-accent hover:text-primary transition-colors font-medium">
                   {t("forgot_password")}
                 </Link>
               </div>
@@ -119,7 +119,7 @@ export default function LoginPage() {
 
           <p className="text-center text-sm text-text-muted mt-6">
             {t("no_account")}{" "}
-            <Link href="/auth/register" className="text-primary font-bold hover:underline">
+            <Link href={`/${locale}/auth/register`} className="text-primary font-bold hover:underline">
               {t("btn_register")}
             </Link>
           </p>
