@@ -3,6 +3,12 @@ import { getMessages } from 'next-intl/server';
 import { ThemeProvider } from "@/components/theme-provider";
 import "@/app/globals.css";
 import { GlobalLoader } from '@/components/global-loader';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "ChurchSaaS",
+  description: "ChuchSaas is a church management system that helps you manage your chuch administrative tasks."
+}
 
 export default async function LocaleLayout({
   children,

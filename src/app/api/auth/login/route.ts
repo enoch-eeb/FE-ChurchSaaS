@@ -23,8 +23,6 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: data.message || "Kredensial tidak valid" }, { status: beResponse.status });
     }
 
-    // Swagger BE mengembalikan token di root: { token: "..." }
-    // Guard: pastikan token ada sebelum set cookie
     const token = data.token ?? data.data?.token;
     if (!token) {
       console.error("ERROR PROXY LOGIN: Token tidak ditemukan di response BE", data);

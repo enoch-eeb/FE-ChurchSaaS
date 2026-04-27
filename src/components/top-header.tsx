@@ -1,5 +1,6 @@
 import { ThemeToggle } from "@/components/theme-toggle";
 import { LocaleToggle } from "@/components/locale-toggle";
+import { ProfileDropdown } from "./profile-dropdown";
 
 export function TopHeader() {
   return (
@@ -7,6 +8,7 @@ export function TopHeader() {
       <div className="flex items-center gap-3">
         <LocaleToggle />
         <ThemeToggle />
+        <ProfileDropdown />
       </div>
     </header>
   );

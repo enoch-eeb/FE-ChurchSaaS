@@ -1,210 +1,180 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useLoaderStore } from "@/store/useLoaderStore";
+import { useState, useEffect, useCallback } from "react";
+import { useTranslations } from "next-intl";
+import { 
+  Search, MoreVertical, ChevronLeft, ChevronRight, Loader2, UserPlus 
+} from "lucide-react";
 
-interface Member {
+type Member = {
   id: string;
   name: string;
-  email: string;
   phone: string;
-  role: string;
-  position: string;
-}
+  email?: string;
+  status: string;
+};
 
 export default function MemberDirectoryPage() {
-  const { showLoader, hideLoader } = useLoaderStore();
+  const t = useTranslations("MemberManagementsPage.directory");
+  
   const [members, setMembers] = useState<Member[]>([]);
-  const [notification, setNotification] = useState<{ type: "success" | "error"; message: string } | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalMode, setModalMode] = useState<"add" | "edit">("add");
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [searchInput, setSearchInput] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   
-  const [formData, setFormData] = useState({ 
-    name: "", 
-    email: "", 
-    phone: "", 
-    role: "MEMBER",
-    position: "", // Field baru
-    password: "Gereja123!" 
-  });
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
+
+  const getToken = useCallback(() => {
+    return document.cookie.split("; ").find((row) => row.startsWith("coma_token="))?.split("=")[1] ?? localStorage.getItem("token") ?? "";
+  }, []);
 
   useEffect(() => {
-    if (notification) {
-      const timer = setTimeout(() => setNotification(null), 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [notification]);
+    const timer = setTimeout(() => {
+      setDebouncedSearch(searchInput);
+      setPage(1);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [searchInput]);
 
-  const fetchMembers = async () => {
+  const fetchMembers = useCallback(async () => {
+    setIsLoading(true);
     try {
-      const res = await fetch("/api/members");
-      const result = await res.json();
-      if (result.success) setMembers(result.data);
-    } catch (error) {
-      setNotification({ type: "error", message: "Gagal memuat data." });
-    }
-  };
+      const url = new URL(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/members`);
+      url.searchParams.set("page", page.toString());
+      url.searchParams.set("limit", "10");
+      if (debouncedSearch) url.searchParams.set("search", debouncedSearch);
 
-  useEffect(() => { fetchMembers(); }, []);
-
-  const handleOpenAdd = () => {
-    setModalMode("add");
-    setFormData({ name: "", email: "", phone: "", role: "MEMBER", position: "", password: "Gereja123!" });
-    setIsModalOpen(true);
-  };
-
-  const handleOpenEdit = (member: Member) => {
-    setModalMode("edit");
-    setSelectedId(member.id);
-    setFormData({ 
-      name: member.name, 
-      email: member.email, 
-      phone: member.phone || "", 
-      role: member.role || "MEMBER",
-      position: member.position || "",
-      password: "" 
-    });
-    setIsModalOpen(true);
-  };
-
-  const handleSave = async (e: React.FormEvent) => {
-    e.preventDefault();
-    showLoader("Menyimpan...");
-    
-    try {
-      const url = modalMode === "add" ? "/api/members" : `/api/members/${selectedId}`;
-      const method = modalMode === "add" ? "POST" : "PUT";
-
-      const payload = { ...formData };
-      if (modalMode === "edit" && !payload.password) {
-        delete (payload as any).password;
-      }
-
-      const res = await fetch(url, {
-        method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+      const res = await fetch(url.toString(), {
+        headers: { Authorization: `Bearer ${getToken()}` },
       });
+      const data = await res.json();
 
-      const result = await res.json();
-      if (result.success) {
-        setIsModalOpen(false);
-        fetchMembers();
-        setNotification({ type: "success", message: "Berhasil disimpan!" });
-      } else {
-        setNotification({ type: "error", message: result.message || "Gagal (Cek Role Anda)" });
+      if (res.ok && data.data) {
+        const memberList = Array.isArray(data.data) ? data.data : (data.data.items ?? []);
+        setMembers(memberList);
+        setTotalPages(data.data.totalPages ?? 1);
+        setTotalItems(data.data.totalItems ?? memberList.length);
       }
-    } catch (error) {
-      setNotification({ type: "error", message: "Kesalahan sistem." });
+    } catch (err) {
+      console.error(err);
     } finally {
-      hideLoader();
+      setIsLoading(false);
     }
-  };
+  }, [page, debouncedSearch, getToken]);
 
-  const handleDelete = async (id: string) => {
-    if (!confirm("Hapus member ini?")) return;
-    showLoader("Menghapus...");
-    try {
-      const res = await fetch(`/api/members/${id}`, { method: "DELETE" });
-      const result = await res.json();
-      if (result.success) {
-        fetchMembers();
-        setNotification({ type: "success", message: "Terhapus!" });
-      }
-    } catch (error) {
-      setNotification({ type: "error", message: "Gagal menghapus." });
-    } finally {
-      hideLoader();
-    }
-  };
+  useEffect(() => {
+    fetchMembers();
+  }, [fetchMembers]);
 
   return (
-    <div className="p-8 md:p-12 max-w-6xl mx-auto space-y-6">
-      
-      {notification && (
-        <div className={`fixed top-6 right-6 z-[99999] px-5 py-3 rounded-lg shadow-xl border animate-in fade-in slide-in-from-top-4 duration-300 ${notification.type === "success" ? "bg-green-900 border-green-500 text-green-100" : "bg-red-900 border-red-500 text-red-100"}`}>
-          {notification.message}
-        </div>
-      )}
-
-      <header className="flex justify-between items-center border-b border-border/60 pb-6">
+    <div className="p-6 max-w-7xl mx-auto flex flex-col min-h-screen">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-primary tracking-tight">Daftar Member</h1>
-          <p className="text-text-muted text-sm">Manajemen jemaat dan pelayan gereja.</p>
+          <h1 className="text-3xl font-bold text-primary tracking-tight">
+            {t("title")}
+          </h1>
+          <p className="text-text-muted mt-1">
+            {t("description")}
+          </p>
         </div>
-        <button onClick={handleOpenAdd} className="bg-primary text-primary-foreground px-4 py-2 rounded-md font-bold hover:opacity-90 transition-all">
-          + Tambah Member
+        <button className="flex items-center justify-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-lg font-bold hover:opacity-90 transition-all cursor-pointer">
+          <UserPlus size={18} /> {t("btn_add")}
         </button>
-      </header>
-
-      <div className="bg-bg-alt border border-border/60 rounded-lg overflow-hidden">
-        <table className="w-full text-left text-sm text-foreground">
-          <thead className="bg-secondary/20 text-text-muted border-b border-border/60 uppercase text-[10px] tracking-widest font-bold">
-            <tr>
-              <th className="px-6 py-4">Nama / Posisi</th>
-              <th className="px-6 py-4">Kontak</th>
-              <th className="px-6 py-4">Peran</th>
-              <th className="px-6 py-4 text-right">Aksi</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-border/60">
-            {members.map((m) => (
-              <tr key={m.id} className="hover:bg-secondary/5 transition-colors">
-                <td className="px-6 py-4">
-                  <div className="font-bold">{m.name}</div>
-                  <div className="text-[10px] text-primary uppercase">{m.position || "Tidak ada posisi"}</div>
-                </td>
-                <td className="px-6 py-4">
-                  <div className="text-xs">{m.email}</div>
-                  <div className="text-[10px] text-text-muted">{m.phone || "-"}</div>
-                </td>
-                <td className="px-6 py-4">
-                  <span className="px-2 py-0.5 rounded text-[9px] font-black border border-primary/30 bg-primary/5 text-primary uppercase">
-                    {m.role}
-                  </span>
-                </td>
-                <td className="px-6 py-4 text-right space-x-4">
-                  <button onClick={() => handleOpenEdit(m)} className="text-primary hover:text-white transition-colors font-bold text-xs uppercase tracking-tighter">Edit</button>
-                  <button onClick={() => handleDelete(m.id)} className="text-red-500/70 hover:text-red-500 transition-colors font-bold text-xs uppercase tracking-tighter">Hapus</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       </div>
 
-      {isModalOpen && (
-        <div className="fixed inset-0 z-[9990] flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm">
-          <div className="bg-bg-alt border border-border/60 w-full max-w-md rounded-lg p-6 shadow-2xl">
-            <h2 className="text-xl font-bold text-primary mb-6 tracking-tight">
-              {modalMode === "add" ? "Tambah Member" : "Edit Member"}
-            </h2>
-            <form onSubmit={handleSave} className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <input required placeholder="Nama Lengkap" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="col-span-2 w-full p-2 bg-background border border-border rounded-md text-sm focus:border-primary outline-none" />
-                <input placeholder="Jabatan/Posisi (cth: Diaken)" value={formData.position} onChange={e => setFormData({...formData, position: e.target.value})} className="col-span-2 w-full p-2 bg-background border border-border rounded-md text-sm focus:border-primary outline-none" />
-              </div>
-              
-              <input required type="email" placeholder="Email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full p-2 bg-background border border-border rounded-md text-sm focus:border-primary outline-none" />
-              <input placeholder="Telepon" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full p-2 bg-background border border-border rounded-md text-sm focus:border-primary outline-none" />
-              
-              <select value={formData.role} onChange={e => setFormData({...formData, role: e.target.value})} className="w-full p-2 bg-background border border-border rounded-md text-sm text-foreground focus:border-primary outline-none">
-                <option value="MEMBER">Jemaat</option>
-                <option value="VOLUNTEER">Pelayan / Volunteer</option>
-                <option value="CHURCH_ADMIN">Admin Gereja</option>
-                <option value="SUPER_ADMIN">Gembala</option>
-              </select>
-
-              <div className="flex justify-end gap-2 pt-4 border-t border-border/40">
-                <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 text-text-muted text-sm font-bold uppercase tracking-widest">Batal</button>
-                <button type="submit" className="px-6 py-2 bg-primary text-primary-foreground rounded-md font-black text-xs uppercase tracking-widest shadow-lg shadow-primary/20">Simpan</button>
-              </div>
-            </form>
+      <div className="bg-bg-alt border border-border/60 rounded-xl shadow-sm flex flex-col overflow-hidden">
+        <div className="p-4 border-b border-border/60 bg-background/50">
+          <div className="relative max-w-md">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted" size={18} />
+            <input
+              type="text"
+              placeholder={t("search_placeholder")}
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 bg-background border border-border rounded-lg focus:outline-none focus:border-primary text-sm transition-colors"
+            />
           </div>
         </div>
-      )}
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse min-w-[700px]">
+            <thead>
+              <tr className="bg-background/80 border-b border-border/60 text-sm text-text-muted">
+                <th className="py-4 px-6 font-medium">{t("table.id")}</th>
+                <th className="py-4 px-6 font-medium">{t("table.name")}</th>
+                <th className="py-4 px-6 font-medium">{t("table.contact")}</th>
+                <th className="py-4 px-6 font-medium">{t("table.status")}</th>
+                <th className="py-4 px-6 font-medium text-right">{t("table.action")}</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border/40">
+              {isLoading ? (
+                <tr>
+                  <td colSpan={5} className="py-12 text-center text-text-muted">
+                    <Loader2 className="mx-auto animate-spin mb-2" /> {t("loading")}
+                  </td>
+                </tr>
+              ) : members.length === 0 ? (
+                <tr>
+                  <td colSpan={5} className="py-12 text-center text-text-muted">
+                    {t("no_data")}
+                  </td>
+                </tr>
+              ) : (
+                members.map((m) => (
+                  <tr key={m.id} className="hover:bg-background/40 transition-colors">
+                    <td className="py-4 px-6">
+                      <div className="text-sm text-text-muted">{m.id}.</div>
+                    </td>
+                    <td className="py-4 px-6">
+                      <div className="font-bold text-primary">{m.name}</div>
+                    </td>
+                    <td className="py-4 px-6">
+                      <div className="text-sm font-mono">{m.phone}</div>
+                      <div className="text-xs text-text-muted">{m.email ?? "-"}</div>
+                    </td>
+                    <td className="py-4 px-6 text-sm">
+                      <span className="px-2.5 py-1 rounded-full bg-green-500/10 text-green-600 text-xs font-bold uppercase">
+                        {t("status_active")}
+                      </span>
+                    </td>
+                    <td className="py-4 px-6 text-right">
+                      <button className="p-2 text-text-muted hover:text-primary transition-colors cursor-pointer">
+                        <MoreVertical size={18} />
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="p-4 border-t border-border/60 bg-background/50 flex justify-between items-center">
+          <p className="text-sm text-text-muted italic">
+            {t("total_member")}: <span className="font-bold text-primary">{totalItems}</span>
+          </p>
+          <div className="flex gap-2">
+            <button 
+              onClick={() => setPage(p => Math.max(1, p - 1))}
+              disabled={page === 1 || isLoading}
+              className="p-2 border border-border rounded-lg hover:bg-border/50 disabled:opacity-50 cursor-pointer"
+            >
+              <ChevronLeft size={18} />
+            </button>
+            <button 
+              onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+              disabled={page === totalPages || isLoading}
+              className="p-2 border border-border rounded-lg hover:bg-border/50 disabled:opacity-50 cursor-pointer"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

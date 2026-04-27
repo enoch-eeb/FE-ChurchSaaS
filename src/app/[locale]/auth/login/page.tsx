@@ -62,7 +62,7 @@ export default function LoginPage() {
 
       {/* KONTEN LOGIN */}
       <div className="flex-1 flex items-center justify-center p-4 pb-20">
-        <div className="w-full max-w-md p-8 bg-bg-alt border border-border/60 rounded-[8px] shadow-xl">
+        <div className="w-full max-w-md p-8 bg-bg-alt border border-border/60 rounded-lg shadow-xl">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-black italic text-primary font-mono tracking-tighter">COMA.</h1>
             <h2 className="text-xl font-bold mt-4">{t("login_title")}</h2>
@@ -70,7 +70,7 @@ export default function LoginPage() {
           </div>
 
           {error && (
-            <div className="mb-4 p-3 bg-red-500/10 border border-red-500/50 text-red-600 rounded-[8px] text-sm text-center">
+            <div className="mb-4 p-3 bg-red-500/10 border border-red-500/50 text-red-600 rounded-lg text-sm text-center">
               {error}
             </div>
           )}
@@ -82,7 +82,7 @@ export default function LoginPage() {
                 name="churchCode"
                 type="text"
                 required
-                className="w-full p-3 bg-background border border-border rounded-[8px] focus:outline-none focus:border-primary transition-colors uppercase"
+                className="w-full p-3 bg-background border border-border rounded-lg focus:outline-none focus:border-primary transition-colors uppercase"
                 placeholder="e.g. GBI-123"
               />
             </div>
@@ -93,7 +93,7 @@ export default function LoginPage() {
                 name="email"
                 type="email"
                 required
-                className="w-full p-3 bg-background border border-border rounded-[8px] focus:outline-none focus:border-primary transition-colors"
+                className="w-full p-3 bg-background border border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
                 placeholder="admin@church.com"
               />
             </div>
@@ -113,7 +113,7 @@ export default function LoginPage() {
                   name="password"
                   type={showPassword ? "text" : "password"}
                   required
-                  className="w-full p-3 pr-11 bg-background border border-border rounded-[8px] focus:outline-none focus:border-primary transition-colors"
+                  className="w-full p-3 pr-11 bg-background border border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
                   placeholder="••••••••"
                 />
                 <button
