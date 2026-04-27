@@ -62,7 +62,7 @@
         "title": "Member Directory",
         "desc": "Add, edit, delete, and manage the entire congregation database."
       },
-      "attendance": {
+      "member-attendance": {
         "title": "Member Attendance",
         "desc": "Manage service attendance, recaps, and attendance reports."
       },
@@ -154,18 +154,46 @@
       "title": "Member Directory",
       "description": "Manage all church congregation data in one place.",
       "btn_add": "Add Member",
-      "search_placeholder": "Search member...",
+      "search_placeholder": "Search member by name or phone...",
       "table": {
+        "no": "No",
         "id": "ID",
         "name": "Name",
-        "contact": "Contact",
-        "status": "Status",
+        "dob": "Date of Birth",
+        "email": "Email",
+        "phone": "Phone",
+        "gender": "Gender",
+        "marriage": "Marriage Status",
+        "role": "Role",
+        "church": "Church",
+        "division": "Division",
+        "division_role": "Division Role",
+        "position": "Position",
+        "address": "Address",
         "action": "Action"
       },
-      "status_active": "Active",
-      "total_member": "Total members",
-      "loading": "Loading data...",
-      "no_data": "No members found."
+      "rows_per_page": "Rows per page",
+      "total": "Total: ",
+      "loading": "Loading member data...",
+      "no_data": "No members found.",
+      "delete_confirm_title": "Confirm Delete",
+      "delete_confirm_desc": "Are you sure you want to delete this member? This action cannot be undone.",
+      "btn_cancel": "Cancel",
+      "btn_delete": "Delete",
+      "btn_close": "Close",
+      "view_detail": "Member Details",
+      "detail_info": "Primary Information",
+      "detail_church": "Church & Division Info",
+      "edit_title": "Edit Member",
+      "btn_save": "Save Changes",
+      "filter_title": "Advanced Filters",
+      "filter_apply": "Apply Filters",
+      "filter_reset": "Reset",
+      "filter_dob_start": "Date of Birth (Start)",
+      "filter_dob_end": "Date of Birth (End)",
+      "all_genders": "All Genders",
+      "all_marriage": "All Status",
+      "all_roles": "All Roles"
     }
   }
 }
