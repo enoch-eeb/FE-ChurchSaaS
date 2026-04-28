@@ -7,6 +7,7 @@ export async function POST() {
       { status: 200 }
     );
 
+    //Hapus cookie dengan set value kosong dan maxAge 0
     response.cookies.set({
       name: "coma_token",
       value: "",
@@ -14,6 +15,7 @@ export async function POST() {
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
       maxAge: 0,
+      expires: new Date(0), // Memastikan expired di masa lalu
       path: "/",
     });
 

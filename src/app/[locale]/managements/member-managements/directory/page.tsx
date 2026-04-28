@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 
 type Member = {
-  id: string;
+  memberId: string;
   name: string;
   email: string;
   phone: string;
@@ -151,7 +151,7 @@ export default function MemberDirectoryPage() {
     if (!editMember) return;
     setIsSaving(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/members/${editMember.id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/members/${editMember.memberId}`, { // <-- Diperbarui
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${getToken()}` },
         body: JSON.stringify(editMember)
@@ -323,7 +323,7 @@ export default function MemberDirectoryPage() {
                 <tr><td colSpan={9} className="py-20 text-center text-text-muted">{t("no_data")}</td></tr>
               ) : (
                 members.map((m, idx) => (
-                  <tr key={m.id} className="hover:bg-background/40 transition-colors text-sm">
+                  <tr key={m.memberId} className="hover:bg-background/40 transition-colors text-sm"> {/* <-- Diperbarui */}
                     <td className="py-4 px-4 text-text-muted font-mono">{(page - 1) * limit + idx + 1}</td>
                     <td className="py-4 px-4 text-foreground">{m.name}</td>
                     <td className="py-4 px-4 text-text-muted">{m.dateOfBirth || "-"}</td>
@@ -340,7 +340,7 @@ export default function MemberDirectoryPage() {
                       <div className="flex justify-center gap-1">
                         <button onClick={() => setViewMember(m)} className="p-2 text-foreground hover:bg-border/50 rounded-lg transition-colors cursor-pointer"><Eye size={16} /></button>
                         <button onClick={() => setEditMember(m)} className="p-2 text-blue-500 hover:bg-blue-500/10 rounded-lg transition-colors cursor-pointer"><Edit2 size={16} /></button>
-                        <button onClick={() => setDeleteId(m.id)} className="p-2 text-red-500 hover:bg-red-500/10 rounded-lg transition-colors cursor-pointer"><Trash2 size={16} /></button>
+                        <button onClick={() => setDeleteId(m.memberId)} className="p-2 text-red-500 hover:bg-red-500/10 rounded-lg transition-colors cursor-pointer"><Trash2 size={16} /></button> {/* <-- Diperbarui */}
                       </div>
                     </td>
                   </tr>
@@ -399,7 +399,7 @@ export default function MemberDirectoryPage() {
               <div>
                 <h4 className="text-sm font-bold mb-3 uppercase tracking-wider text-center text-foreground">{t("detail_info")}</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-bg-alt p-4 rounded-lg border border-border/50">
-                  <div><p className="text-xs text-text-muted">{t("table.id")}</p><p className="text-sm text-foreground">{viewMember.id}</p></div>
+                  <div><p className="text-xs text-text-muted">{t("table.id")}</p><p className="text-sm text-foreground">{viewMember.memberId}</p></div> {/* <-- Diperbarui */}
                   <div><p className="text-xs text-text-muted">{t("table.name")}</p><p className="text-sm text-foreground">{viewMember.name}</p></div>
                   <div><p className="text-xs text-text-muted">{t("table.email")}</p><p className="text-sm text-foreground">{viewMember.email || "-"}</p></div>
                   <div><p className="text-xs text-text-muted">{t("table.phone")}</p><p className="text-sm text-foreground">{viewMember.phone || "-"}</p></div>
