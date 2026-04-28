@@ -62,7 +62,7 @@
         "title": "Direktori Jemaat",
         "desc": "Tambah, edit, hapus, dan kelola seluruh database jemaat."
       },
-      "attendance": {
+      "member-attendance": {
         "title": "Absensi Jemaat",
         "desc": "Kelola kehadiran ibadah, rekapitulasi, dan laporan absensi."
       },
@@ -152,20 +152,48 @@
     },
     "directory": {
       "title": "Direktori Jemaat",
-      "description": "Kelola data seluruh jemaat gereja dalam satu tempat.",
+      "description": "Kelola seluruh data jemaat gereja dalam satu tempat.",
       "btn_add": "Tambah Jemaat",
-      "search_placeholder": "Cari jemaat...",
+      "search_placeholder": "Cari jemaat berdasarkan nama atau telepon...",
       "table": {
+        "no": "No",
         "id": "ID",
         "name": "Nama",
-        "contact": "Kontak",
-        "status": "Status",
+        "dob": "Tgl Lahir",
+        "email": "Email",
+        "phone": "Telepon",
+        "gender": "Gender",
+        "marriage": "Status Nikah",
+        "role": "Role",
+        "church": "Gereja",
+        "division": "Divisi",
+        "division_role": "Peran Divisi",
+        "position": "Jabatan",
+        "address": "Alamat",
         "action": "Aksi"
       },
-      "status_active": "Aktif",
-      "total_member": "Total jemaat",
-      "loading": "Memuat data...",
-      "no_data": "Tidak ada jemaat ditemukan."
+      "rows_per_page": "Baris per halaman",
+      "total": "Total: ",
+      "loading": "Memuat data jemaat...",
+      "no_data": "Tidak ada jemaat ditemukan.",
+      "delete_confirm_title": "Konfirmasi Hapus",
+      "delete_confirm_desc": "Apakah Anda yakin ingin menghapus jemaat ini? Tindakan ini tidak dapat dibatalkan.",
+      "btn_cancel": "Batal",
+      "btn_delete": "Hapus",
+      "btn_close": "Tutup",
+      "view_detail": "Detail Jemaat",
+      "detail_info": "Informasi Utama",
+      "detail_church": "Informasi Gereja & Divisi",
+      "edit_title": "Edit Jemaat",
+      "btn_save": "Simpan Perubahan",
+      "filter_title": "Filter Lanjutan",
+      "filter_apply": "Terapkan Filter",
+      "filter_reset": "Reset",
+      "filter_dob_start": "Tanggal Lahir (Mulai)",
+      "filter_dob_end": "Tanggal Lahir (Akhir)",
+      "all_genders": "Semua Gender",
+      "all_marriage": "Semua Status",
+      "all_roles": "Semua Role"
     }
   }
 }
