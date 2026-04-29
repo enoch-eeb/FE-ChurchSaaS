@@ -5,7 +5,7 @@ export async function POST(request: Request) {
     const body = await request.json();
 
     if (!body.churchCode || !body.email || !body.password) {
-      return NextResponse.json({ message: "Data tidak lengkap" }, { status: 400 });
+      return NextResponse.json({ success: false, message: "Data tidak lengkap" }, { status: 400 });
     }
 
     const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, "") || "http://localhost:3000";
@@ -17,33 +17,43 @@ export async function POST(request: Request) {
       body: JSON.stringify(body),
     });
 
+    //Cek jika BE mengembalikan HTML (error 404/500 biasanya)
+    const contentType = beResponse.headers.get("content-type");
+    if (contentType && contentType.includes("text/html")) {
+      return NextResponse.json({ success: false, message: "Backend server error (HTML response)" }, { status: 500 });
+    }
+
     const data = await beResponse.json();
 
     if (!beResponse.ok) {
-      return NextResponse.json({ message: data.message || "Kredensial tidak valid" }, { status: beResponse.status });
+      return NextResponse.json(
+        { success: false, message: data.message || "Kredensial tidak valid" }, 
+        { status: beResponse.status }
+      );
     }
 
-    const token = data.token ?? data.data?.token;
+    //Ambil token dari struktur data yang baru
+    const token = data.token; 
     if (!token) {
-      console.error("ERROR PROXY LOGIN: Token tidak ditemukan di response BE", data);
-      return NextResponse.json({ message: "Token tidak diterima dari server" }, { status: 500 });
+      return NextResponse.json({ success: false, message: "Token tidak diterima dari server" }, { status: 500 });
     }
 
     const response = NextResponse.json({ success: true, data: data }, { status: 200 });
 
+    //Set Cookie
     response.cookies.set({
       name: "coma_token",
       value: token,
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
-      maxAge: 60 * 60 * 24,
+      maxAge: 60 * 60 * 24, // 1 hari
       path: "/",
     });
 
     return response;
   } catch (error) {
     console.error("ERROR PROXY LOGIN:", error);
-    return NextResponse.json({ message: "Terjadi kesalahan koneksi ke server" }, { status: 500 });
+    return NextResponse.json({ success: false, message: "Terjadi kesalahan koneksi ke server" }, { status: 500 });
   }
 }

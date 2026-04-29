@@ -4,12 +4,13 @@ import { cookies } from "next/headers";
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, "") || "http://localhost:3000";
 const BE_URL = `${BASE_URL}/api/v1/members`;
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get("coma_token")?.value;
+    const searchParams = req.nextUrl.search;
 
-    const res = await fetch(BE_URL, {
+    const res = await fetch(`${BE_URL}${searchParams}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
