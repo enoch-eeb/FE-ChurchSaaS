@@ -24,8 +24,17 @@ type AttendanceRecord = Record<string, Record<string, boolean>>;
 type ActiveTab = "attendance" | "followup" | "analysis";
 type SortConfig = { key: string; direction: "asc" | "desc" | "default" };
 
+type AIAlert = {
+  id: string;
+  member_id: string;
+  trigger_reason: string;
+  severity: string;
+  status: string;
+};
+
 export default function AttendancePage() {
   const t = useTranslations("MemberManagementsPage.AttendancePage");
+  const tCommon = useTranslations("Common");
   const locale = useLocale();
 
   const [activeTab, setActiveTab] = useState<ActiveTab>("attendance");
@@ -59,6 +68,9 @@ export default function AttendancePage() {
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
   const [newEventName, setNewEventName] = useState("");
 
+  const [alerts, setAlerts] = useState<AIAlert[]>([]);
+  const [isLoadingAlerts, setIsLoadingAlerts] = useState(false);
+
   const getToken = useCallback(() => 
     document.cookie.split("; ").find((row) => row.startsWith("coma_token="))?.split("=")[1] ?? 
     localStorage.getItem("token") ?? "", []);
@@ -88,7 +100,7 @@ export default function AttendancePage() {
       });
       const data = await res.json();
       if (res.ok && data.data) setEvents(data.data);
-    } catch (err) { console.error(err); }
+    } catch (err) {}
   }, [getToken]);
 
   const fetchMembers = useCallback(async () => {
@@ -114,7 +126,7 @@ export default function AttendancePage() {
         setTotalPages(data.data.totalPages ?? 1);
         setTotalItems(data.data.totalItems ?? 0);
       }
-    } catch (err) { console.error(err); } finally { setIsLoading(false); }
+    } catch (err) {} finally { setIsLoading(false); }
   }, [page, limit, debouncedSearch, activeFilters, sortConfig, getToken]);
 
   useEffect(() => { fetchEvents(); fetchMembers(); }, [fetchEvents, fetchMembers]);
@@ -131,10 +143,43 @@ export default function AttendancePage() {
         setAllMembers(data.data.items ?? []); 
         setAllMembersLoaded(true); 
       }
-    } catch (err) { console.error(err); } finally { setIsLoadingAll(false); }
+    } catch (err) {} finally { setIsLoadingAll(false); }
   }, [allMembersLoaded, getToken]);
 
   useEffect(() => { if (activeTab !== "attendance") fetchAllMembers(); }, [activeTab, fetchAllMembers]);
+
+  const fetchFollowUpAlerts = useCallback(async () => {
+    setIsLoadingAlerts(true);
+    try {
+      const res = await fetch(`/api/alerts?status=PENDING`);
+      const result = await res.json();
+      if (result.success && result.data) {
+        setAlerts(result.data);
+      }
+    } catch (error) {} finally {
+      setIsLoadingAlerts(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (activeTab === "followup") {
+      fetchFollowUpAlerts();
+    }
+  }, [activeTab, fetchFollowUpAlerts]);
+
+  const handleMarkAsContacted = async (alertId: string) => {
+    try {
+      const res = await fetch(`/api/alerts/${alertId}/status`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: 'CONTACTED' })
+      });
+      
+      if (res.ok) {
+        setAlerts(prev => prev.filter(a => a.id !== alertId));
+      }
+    } catch (error) {}
+  };
 
   const toggleAttendance = async (memberId: string) => {
     if (!selectedEventId) return;
@@ -147,7 +192,7 @@ export default function AttendancePage() {
         body: JSON.stringify({ eventId: selectedEventId, memberId, present: !current }),
       });
       setAttendance(prev => ({ ...prev, [selectedEventId]: { ...prev[selectedEventId], [memberId]: !current } }));
-    } catch (err) { console.error(err); } finally { setIsToggling(null); }
+    } catch (err) {} finally { setIsToggling(null); }
   };
 
   const handleSort = (key: string) => {
@@ -182,7 +227,7 @@ export default function AttendancePage() {
         setIsEventModalOpen(false);
         setNewEventName("");
       }
-    } catch (err) { console.error(err); }
+    } catch (err) {}
   };
 
   const downloadQR = () => {
@@ -337,27 +382,53 @@ export default function AttendancePage() {
             </table>
           </div>
 
-          <div className="p-4 border-t border-border/60 bg-background/50 flex flex-col sm:flex-row justify-between items-center gap-4 text-left">
+          <div className="p-4 border-t border-border/60 bg-background/50 flex flex-col sm:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-4">
-              <p className="text-xs text-text-muted pr-4 border-r border-border/60">Total: <span className="font-bold text-foreground">{totalItems}</span></p>
+              <p className="text-xs text-text-muted pr-4 border-r border-border/60">
+                {tCommon("total")}<span className="font-bold text-foreground pl-1">{totalItems}</span>
+              </p>
               <div className="flex items-center gap-2">
-                <p className="text-xs text-text-muted">Rows per page:</p>
+                <p className="text-xs text-text-muted">{tCommon("rows_per_page")}:</p>
                 <div className="relative">
-                  <select value={limit} onChange={(e) => { setLimit(Number(e.target.value)); setPage(1); }} className="appearance-none bg-bg-alt border border-border rounded-lg px-3 py-1.5 pr-8 text-xs font-bold focus:outline-none cursor-pointer">
-                    {[10, 25, 50].map(v => <option key={v} value={v}>{v}</option>)}
+                  <select
+                    value={limit}
+                    onChange={(e) => { setLimit(Number(e.target.value)); setPage(1); }}
+                    className="appearance-none bg-bg-alt border border-border text-foreground rounded-lg px-3 py-1.5 pr-8 text-xs font-bold focus:outline-none focus:border-primary cursor-pointer"
+                  >
+                    {[10, 25, 50, 100].map(v => <option key={v} value={v}>{v}</option>)}
                   </select>
                   <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none" size={12} />
                 </div>
               </div>
             </div>
+
             <div className="flex items-center gap-1">
-              <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1 || isLoading} className="p-2 text-text-muted hover:bg-border/50 rounded-lg disabled:opacity-30 cursor-pointer"><ChevronLeft size={18} /></button>
+              <button
+                onClick={() => setPage(p => Math.max(1, p - 1))}
+                disabled={page === 1 || isLoading}
+                className="p-2 text-text-muted hover:bg-border/50 rounded-lg disabled:opacity-30 transition-colors cursor-pointer"
+              >
+                <ChevronLeft size={18} />
+              </button>
               <div className="flex items-center gap-1 mx-1">
                 {paginationRange.map((p, i) => (
-                  <button key={i} onClick={() => typeof p === "number" && setPage(p)} disabled={p === page || p === "..."} className={`min-w-8 h-8 text-xs font-bold rounded-lg transition-all cursor-pointer ${p === page ? "bg-primary text-primary-foreground shadow-sm" : p === "..." ? "text-text-muted cursor-default" : "text-text-muted hover:bg-border/50"}`}>{p}</button>
+                  <button
+                    key={i}
+                    onClick={() => typeof p === "number" && setPage(p)}
+                    disabled={p === "..." || p === page}
+                    className={`min-w-8 h-8 text-xs font-bold rounded-lg transition-all cursor-pointer ${p === page ? "bg-primary text-primary-foreground shadow-sm" : p === "..." ? "text-text-muted cursor-default" : "text-text-muted hover:bg-border/50"}`}
+                  >
+                    {p}
+                  </button>
                 ))}
               </div>
-              <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages || isLoading} className="p-2 text-text-muted hover:bg-border/50 rounded-lg disabled:opacity-30 cursor-pointer"><ChevronRight size={18} /></button>
+              <button
+                onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+                disabled={page === totalPages || isLoading}
+                className="p-2 text-text-muted hover:bg-border/50 rounded-lg disabled:opacity-30 transition-colors cursor-pointer"
+              >
+                <ChevronRight size={18} />
+              </button>
             </div>
           </div>
         </div>
@@ -367,28 +438,78 @@ export default function AttendancePage() {
         <div className="bg-bg-alt border border-border rounded-lg shadow-sm animate-in fade-in duration-300">
           <div className="p-5 border-b border-border/60 text-center">
             <h2 className="font-bold text-primary text-lg">{t("followup.title")}</h2>
-            <p className="text-text-muted text-sm mt-0.5">{t("followup.description")}</p>
+            <p className="text-text-muted text-sm mt-0.5">AI-generated alerts for members who require attention.</p>
           </div>
-          {events.length < 3 ? (
-            <div className="py-24 text-center"><AlertTriangle className="mx-auto mb-4 text-yellow-500" size={48} /><h3 className="text-lg font-bold text-foreground">{t("followup.notEnoughData")}</h3><p className="text-text-muted text-sm mt-2">{t("followup.notEnoughDataDesc")}</p></div>
-          ) : followUpList.length === 0 ? (
-            <div className="py-24 text-center"><CheckCircle2 className="mx-auto mb-4 text-green-500" size={48} /><p className="font-bold text-xl text-foreground">{t("followup.allActive")}</p></div>
-          ) : (
-            <div className="divide-y divide-border/40">
-              {followUpList.map((m: any) => (
-                <div key={m.id} className="flex items-center justify-between p-5 hover:bg-background/40 transition-colors text-left">
-                  <div><p className="font-bold text-foreground text-sm">{m.name}</p><p className="text-xs text-text-muted font-mono">{m.phone || "-"}</p></div>
-                  <div className="flex items-center gap-4">
-                    <div className="text-right">
-                      <p className="text-[10px] text-text-muted uppercase font-bold tracking-wider">{t("followup.absences")}</p>
-                      <p className="font-black text-orange-500 text-lg">{m.absenceCount}x</p>
+
+          <div className="p-5">
+            {isLoadingAlerts ? (
+              <div className="py-24 flex flex-col items-center justify-center text-text-muted">
+                <Loader2 size={32} className="animate-spin mb-4 text-primary" />
+                <p>Loading AI Alerts...</p>
+              </div>
+            ) : alerts.length === 0 ? (
+              <div className="py-24 text-center">
+                <CheckCircle2 className="mx-auto mb-4 text-green-500" size={48} />
+                <p className="font-bold text-xl text-foreground">{t("followup.allActive")}</p>
+                <p className="text-text-muted text-sm mt-2">No pending follow-ups required at the moment.</p>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-4">
+                {alerts.map((alert) => {
+                  const member = allMembers.find(m => m.id === alert.member_id);
+                  
+                  return (
+                    <div key={alert.id} className="flex flex-col p-5 border border-border/60 rounded-lg bg-background hover:border-primary/50 transition-colors">
+                      <div className="flex justify-between items-start mb-4">
+                        <div className="flex flex-col">
+                          <span className="font-bold text-lg text-foreground">
+                            {member?.name || alert.member_id}
+                          </span>
+                          <span className="text-sm text-text-muted font-mono mt-1">
+                            {member?.phone || "No Phone Number"}
+                          </span>
+                        </div>
+                        <div className={`px-3 py-1 text-[10px] font-black uppercase tracking-wider rounded-md flex items-center gap-1.5 ${
+                          alert.severity === 'HIGH' ? 'bg-red-500/10 text-red-600 border border-red-500/20' : 
+                          alert.severity === 'MEDIUM' ? 'bg-orange-500/10 text-orange-600 border border-orange-500/20' : 
+                          'bg-yellow-500/10 text-yellow-600 border border-yellow-500/20'
+                        }`}>
+                          <AlertTriangle size={14} />
+                          {alert.severity} PRIORITY
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col mb-5">
+                        <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider mb-1.5">Trigger Reason</span>
+                        <span className="text-sm text-foreground bg-bg-alt px-3 py-2.5 rounded-md border border-border/50">
+                          {alert.trigger_reason.replace(/_/g, " ")}
+                        </span>
+                      </div>
+
+                      <div className="flex gap-3 mt-auto pt-4 border-t border-border/40">
+                        <button 
+                          onClick={() => handleMarkAsContacted(alert.id)}
+                          className="flex-1 bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground py-2.5 rounded-lg text-sm font-bold transition-all cursor-pointer"
+                        >
+                          Mark as Contacted
+                        </button>
+                        {member?.phone && (
+                          <a 
+                            href={`https://wa.me/${member.phone.replace(/\D/g, "")}`} 
+                            target="_blank" 
+                            rel="noreferrer"
+                            className="px-4 py-2.5 bg-green-500/10 text-green-600 border border-green-500/20 rounded-lg hover:bg-green-500/20 transition-colors flex items-center justify-center"
+                          >
+                            <Phone size={18} />
+                          </a>
+                        )}
+                      </div>
                     </div>
-                    {m.phone && <a href={`https://wa.me/${m.phone.replace(/\D/g, "")}`} target="_blank" className="p-2.5 bg-green-500/10 text-green-600 rounded-lg border border-green-500/20 hover:bg-green-500/20 transition-all"><Phone size={16} /></a>}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+                  );
+                })}
+              </div>
+            )}
+          </div>
         </div>
       )}
 
