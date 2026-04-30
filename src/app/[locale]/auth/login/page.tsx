@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { LocaleToggle } from "@/components/locale-toggle";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 
 export default function LoginPage() {
   const t = useTranslations("Auth");
@@ -26,7 +26,8 @@ export default function LoginPage() {
     const payload = Object.fromEntries(formData);
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/login`, {
+      // Menggunakan rute proxy API Next.js agar cookie httpOnly bisa terpasang
+      const res = await fetch(`/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -38,12 +39,9 @@ export default function LoginPage() {
         throw new Error(data.message || "Gagal login");
       }
 
-      if (data.token) {
-        localStorage.setItem("token", data.token);
-        document.cookie = `coma_token=${data.token}; path=/; max-age=${60 * 60 * 24}`;
-      }
-
-      router.push(`/${locale}`);
+      // Token sekarang dikelola oleh API Proxy via httpOnly cookie untuk keamanan Web3 yang lebih baik
+      router.push(`/${locale}/managements/member-managements/directory`);
+      router.refresh();
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -53,8 +51,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background transition-colors duration-300">
-
-      {/* TOP HEADER KHUSUS LOGIN */}
+      {/* TOP HEADER */}
       <header className="flex justify-end items-center p-6 px-8 gap-4">
         <LocaleToggle />
         <ThemeToggle />
@@ -70,7 +67,7 @@ export default function LoginPage() {
           </div>
 
           {error && (
-            <div className="mb-4 p-3 bg-red-500/10 border border-red-500/50 text-red-600 rounded-lg text-sm text-center">
+            <div className="mb-4 p-3 bg-red-500/10 border border-red-500/50 text-red-600 rounded-lg text-sm text-center animate-in fade-in zoom-in-95">
               {error}
             </div>
           )}
@@ -82,8 +79,8 @@ export default function LoginPage() {
                 name="churchCode"
                 type="text"
                 required
-                className="w-full p-3 bg-background border border-border rounded-lg focus:outline-none focus:border-primary transition-colors uppercase"
-                placeholder="e.g. GBI-123"
+                className="w-full p-3 bg-background border border-border rounded-lg focus:outline-none focus:border-primary transition-colors uppercase placeholder:text-text-muted/30"
+                placeholder="e.g. GRJ001"
               />
             </div>
 
@@ -93,7 +90,7 @@ export default function LoginPage() {
                 name="email"
                 type="email"
                 required
-                className="w-full p-3 bg-background border border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
+                className="w-full p-3 bg-background border border-border rounded-lg focus:outline-none focus:border-primary transition-colors placeholder:text-text-muted/30"
                 placeholder="admin@church.com"
               />
             </div>
@@ -113,7 +110,7 @@ export default function LoginPage() {
                   name="password"
                   type={showPassword ? "text" : "password"}
                   required
-                  className="w-full p-3 pr-11 bg-background border border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
+                  className="w-full p-3 pr-11 bg-background border border-border rounded-lg focus:outline-none focus:border-primary transition-colors placeholder:text-text-muted/30"
                   placeholder="••••••••"
                 />
                 <button
@@ -130,18 +127,19 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-primary text-primary-foreground py-3 rounded-lg font-bold hover:opacity-90 transition-opacity mt-4 disabled:opacity-50 cursor-pointer"
+              className="w-full bg-primary text-primary-foreground py-3 rounded-lg font-bold hover:opacity-90 transition-all mt-4 disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2"
             >
-              {isLoading ? "Loading..." : t("btn_login")}
+              {isLoading && <Loader2 size={18} className="animate-spin" />}
+              {isLoading ? "Authenticating..." : t("btn_login")}
             </button>
           </form>
 
-          <p className="text-center text-sm text-text-muted mt-6">
-            {t("no_account")}{" "}
-            <Link href={`/${locale}/auth/register`} className="text-primary font-bold hover:underline">
-              {t("btn_register")}
-            </Link>
-          </p>
+          {/* Bagian register sudah dihapus sesuai instruksi */}
+          <div className="mt-8 pt-6 border-t border-border/40 text-center">
+            <p className="text-xs text-text-muted">
+              &copy; {new Date().getFullYear()} COMA Ecosystem. All rights reserved.
+            </p>
+          </div>
         </div>
       </div>
     </div>

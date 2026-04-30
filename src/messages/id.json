@@ -1,35 +1,39 @@
 {
+  "Common": {
+    "total": "Total: ",
+    "rows_per_page": "Baris per halaman"
+  },
   "HomePage": {
     "title": "COMA",
-    "subtitle": "Church Operations Management App",
-    "description": "Satu ekosistem digital terpusat untuk mengelola operasional gereja dengan lebih mudah, transparan, dan terukur.",
+    "subtitle": "Aplikasi Manajemen Operasional Gereja",
+    "description": "Ekosistem digital terpusat untuk mengelola operasional gereja dengan mudah, transparan, dan terukur.",
     "modules": {
       "app": {
-        "title": "App Management",
-          "desc": "Manage the app's core settings, user roles, permissions, and church profile information."
-        },
+        "title": "Manajemen Aplikasi",
+        "desc": "Kelola pengaturan inti aplikasi, peran pengguna, izin, dan informasi profil gereja."
+      },
       "member": {
-        "title": "Member Management",
-        "desc": "Kelola basis data jemaat, status keanggotaan, histori pelayanan, dan pertumbuhan komunitas sel grup."
+        "title": "Manajemen Jemaat",
+        "desc": "Kelola basis data jemaat, status keanggotaan, riwayat pelayanan, dan pertumbuhan komsel."
       },
       "finance": {
-        "title": "Finance Management",
-        "desc": "Sistem pencatatan persembahan, manajemen pengeluaran, dan pelaporan keuangan gereja secara otomatis."
+        "title": "Manajemen Keuangan",
+        "desc": "Sistem pencatatan perpuluhan otomatis, manajemen pengeluaran, dan pelaporan keuangan gereja."
       },
       "inventory": {
-        "title": "Inventory Management",
+        "title": "Manajemen Inventaris",
         "desc": "Pantau inventaris aset gereja, jadwal pemeliharaan fasilitas, dan sistem peminjaman barang."
       },
       "service": {
-        "title": "Service Management",
-        "desc": "Jadwalkan ibadah mingguan, pembagian tugas pelayan Tuhan, dan pengaturan tata ibadah."
+        "title": "Manajemen Ibadah",
+        "desc": "Jadwalkan ibadah mingguan, tugaskan pelayan/relawan, dan atur rencana tata ibadah."
       },
       "event": {
-        "title": "Event Management",
-        "desc": "Sistem registrasi untuk acara khusus, kelas pembinaan (komsel), retreat, dan penjualan tiket."
+        "title": "Manajemen Acara",
+        "desc": "Sistem registrasi untuk acara khusus, kelas pemuridan, retret, dan pemesanan tiket."
       }
     },
-    "footer_quote": "\"Sebab di mana dua atau tiga orang berkumpul dalam Nama-Ku, di situ Aku ada di tengah-tengah mereka.\"",
+    "footer_quote": "\"Sebab di mana dua atau tiga orang berkumpul dalam nama-Ku, di situ Aku ada di tengah-tengah mereka.\"",
     "footer_est": "Est. 2026 • Soli Deo Gloria"
   },
   "Auth": {
@@ -42,12 +46,12 @@
     "btn_login": "Masuk",
     "no_account": "Belum mendaftarkan gereja Anda?",
     "btn_register": "Daftar Sekarang",
-    "loading": "Memproses...",
+    "loading": "Memuat...",
     "btn_logout": "Keluar",
     "forgot_password_title": "Lupa Kata Sandi?",
-    "forgot_password_subtitle": "Masukkan email Anda dan kami akan mengirimkan tautan untuk mengatur ulang kata sandi.",
+    "forgot_password_subtitle": "Masukkan email Anda dan kami akan mengirimkan tautan untuk mengatur ulang kata sandi Anda.",
     "send_reset_link": "Kirim Tautan Reset",
-    "back_to_login": "Kembali ke halaman Login",
+    "back_to_login": "Kembali ke Login",
     "reset_password_title": "Buat Kata Sandi Baru",
     "reset_password_subtitle": "Silakan masukkan kata sandi baru Anda di bawah ini.",
     "new_password": "Kata Sandi Baru",
@@ -55,31 +59,31 @@
     "btn_reset_password": "Simpan Kata Sandi Baru"
   },
   "MemberManagementsPage": {
-    "title": "Manajemen Anggota",
-    "description": "Pusat kendali untuk mengelola data jemaat, absensi, dan struktur organisasi gereja.",
+    "title": "Manajemen Jemaat",
+    "description": "Pusat komando untuk mengelola data jemaat, kehadiran, dan struktur organisasi gereja.",
     "menus": {
       "directory": {
         "title": "Direktori Jemaat",
-        "desc": "Tambah, edit, hapus, dan kelola seluruh database jemaat."
+        "desc": "Tambah, edit, hapus, dan kelola seluruh basis data jemaat."
       },
       "member-attendance": {
-        "title": "Absensi Jemaat",
-        "desc": "Kelola kehadiran ibadah, rekapitulasi, dan laporan absensi."
+        "title": "Kehadiran Jemaat",
+        "desc": "Kelola kehadiran ibadah, rekap, dan laporan absensi."
       },
       "structure": {
         "title": "Manajemen Struktur",
-        "desc": "Atur jabatan, peran kementerian, dan hierarki organisasi gereja."
+        "desc": "Atur posisi, peran pelayanan, dan hierarki organisasi gereja."
       }
     },
     "AttendancePage": {
-      "title": "Absensi",
-      "description": "Kelola kehadiran, sesi event, dan analisis jemaat.",
-      "selectPlaceholder": "Pilih Sesi Event...",
+      "title": "Kehadiran",
+      "description": "Kelola kehadiran, sesi acara, dan analisis jemaat.",
+      "selectPlaceholder": "Pilih Sesi Acara...",
       "createSession": "Buat Sesi",
-      "qrCode": "QR Code",
-      "noEventWarning": "Sistem terkunci. Pilih atau buat Sesi Event untuk mulai melakukan absensi.",
+      "qrCode": "Kode QR",
+      "noEventWarning": "Sistem terkunci. Pilih atau buat Sesi Acara untuk memulai absensi.",
       "tabs": {
-        "attendance": "Absensi",
+        "attendance": "Kehadiran",
         "followup": "Follow-up",
         "analysis": "Analisis"
       },
@@ -89,7 +93,7 @@
         "exportCsv": "Ekspor CSV",
         "loading": "Memuat data...",
         "empty": "Belum ada data jemaat.",
-        "emptySearch": "Tidak ada hasil untuk \"{query}\"",
+        "emptySearch": "Tidak ada hasil yang ditemukan untuk \"{query}\"",
         "alreadyPresent": "Hadir",
         "markPresent": "Tandai Hadir",
         "table": {
@@ -101,13 +105,13 @@
       },
       "followup": {
         "title": "Jemaat Perlu Follow-up",
-        "description": "Tidak hadir 3 kali atau lebih berturut-turut di semua sesi tercatat.",
+        "description": "Absen 3 kali atau lebih berturut-turut di semua sesi yang tercatat.",
         "badge": "{count} jemaat",
         "loading": "Memuat data jemaat...",
-        "notEnoughData": "Data belum cukup",
-        "notEnoughDataDesc": "Minimal 3 sesi event diperlukan untuk laporan follow-up.",
+        "notEnoughData": "Data Tidak Cukup",
+        "notEnoughDataDesc": "Diperlukan setidaknya 3 sesi acara untuk laporan follow-up.",
         "allActive": "Semua jemaat aktif!",
-        "allActiveDesc": "Tidak ada jemaat yang perlu di-follow-up saat ini.",
+        "allActiveDesc": "Tidak ada jemaat yang membutuhkan follow-up saat ini.",
         "absences": "Absen",
         "whatsapp": "WhatsApp"
       },
@@ -120,29 +124,29 @@
         },
         "perSession": {
           "title": "Kehadiran Per Sesi",
-          "description": "Jumlah jemaat hadir dari setiap sesi event.",
-          "empty": "Belum ada sesi event.",
+          "description": "Jumlah hadirin dari setiap sesi acara.",
+          "empty": "Belum ada sesi acara.",
           "present": "hadir"
         },
         "mostActive": {
           "title": "Jemaat Paling Aktif",
-          "description": "Peringkat kehadiran dari seluruh sesi event tercatat.",
+          "description": "Peringkat kehadiran dari semua sesi acara yang tercatat.",
           "loading": "Memuat data...",
-          "empty": "Belum ada data kehadiran untuk ditampilkan.",
+          "empty": "Tidak ada data kehadiran untuk ditampilkan.",
           "sessions": "/{total} sesi",
           "rate": "{rate}% hadir"
         }
       },
       "modal": {
-        "title": "Buat Sesi Event Baru",
+        "title": "Buat Sesi Acara Baru",
         "label": "Nama Sesi / Ibadah",
-        "placeholder": "Misal: Ibadah Raya - 26 April 2026",
+        "placeholder": "mis., Ibadah Raya - 26 April 2026",
         "submit": "Simpan & Mulai Absensi"
       },
       "csv": {
-        "eventName": "Nama Event",
+        "eventName": "Nama Acara",
         "date": "Tanggal",
-        "memberId": "ID Anggota",
+        "memberId": "ID Jemaat",
         "fullName": "Nama Lengkap",
         "phone": "Nomor Telepon",
         "status": "Status",
@@ -152,28 +156,26 @@
     },
     "directory": {
       "title": "Direktori Jemaat",
-      "description": "Kelola seluruh data jemaat gereja dalam satu tempat.",
+      "description": "Kelola semua data jemaat gereja dalam satu tempat.",
       "btn_add": "Tambah Jemaat",
       "search_placeholder": "Cari jemaat berdasarkan nama atau telepon...",
       "table": {
         "no": "No",
         "id": "ID",
         "name": "Nama",
-        "dob": "Tgl Lahir",
+        "dob": "Tanggal Lahir",
         "email": "Email",
         "phone": "Telepon",
-        "gender": "Gender",
-        "marriage": "Status Nikah",
-        "role": "Role",
+        "gender": "Jenis Kelamin",
+        "marriage": "Status Pernikahan",
+        "role": "Peran",
         "church": "Gereja",
         "division": "Divisi",
         "division_role": "Peran Divisi",
-        "position": "Jabatan",
+        "position": "Posisi",
         "address": "Alamat",
         "action": "Aksi"
       },
-      "rows_per_page": "Baris per halaman",
-      "total": "Total: ",
       "loading": "Memuat data jemaat...",
       "no_data": "Tidak ada jemaat ditemukan.",
       "delete_confirm_title": "Konfirmasi Hapus",
@@ -183,17 +185,37 @@
       "btn_close": "Tutup",
       "view_detail": "Detail Jemaat",
       "detail_info": "Informasi Utama",
-      "detail_church": "Informasi Gereja & Divisi",
+      "detail_church": "Info Gereja & Divisi",
       "edit_title": "Edit Jemaat",
       "btn_save": "Simpan Perubahan",
       "filter_title": "Filter Lanjutan",
       "filter_apply": "Terapkan Filter",
-      "filter_reset": "Reset",
+      "filter_reset": "Atur Ulang",
       "filter_dob_start": "Tanggal Lahir (Mulai)",
       "filter_dob_end": "Tanggal Lahir (Akhir)",
       "all_genders": "Semua Gender",
       "all_marriage": "Semua Status",
-      "all_roles": "Semua Role"
+      "all_roles": "Semua Peran"
+    },
+    "birthday": {
+      "title": "Ulang Tahun Jemaat",
+      "description": "Lihat ulang tahun jemaat yang akan datang dan kirimkan ucapan personal.",
+      "search_placeholder": "Cari jemaat berdasarkan nama...",
+      "no_data": "Tidak ada jemaat ditemukan.",
+      "table": {
+        "no": "No",
+        "name": "Nama",
+        "email": "Email",
+        "phone": "Telepon",
+        "dob": "Tanggal Lahir",
+        "gender": "Jenis Kelamin",
+        "action": "Aksi"
+      },
+      "modal_title": "Buat Ucapan Ulang Tahun",
+      "modal_desc": "Sesuaikan dan kirim ucapan ulang tahun untuk",
+      "btn_copy": "Salin Teks",
+      "btn_copied": "Tersalin!",
+      "btn_whatsapp": "Kirim via WhatsApp"
     }
   }
 }

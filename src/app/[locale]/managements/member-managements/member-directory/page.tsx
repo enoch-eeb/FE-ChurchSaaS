@@ -32,6 +32,7 @@ type SortConfig = {
 
 export default function MemberDirectoryPage() {
   const t = useTranslations("MemberManagementsPage.directory");
+  const tCommon = useTranslations("Common");
   
   const [members, setMembers] = useState<Member[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -102,7 +103,6 @@ export default function MemberDirectoryPage() {
         setTotalItems(data.data.totalItems ?? 0);
       }
     } catch (err) {
-      console.error(err);
     } finally {
       setIsLoading(false);
     }
@@ -143,7 +143,7 @@ export default function MemberDirectoryPage() {
         setDeleteId(null);
         fetchMembers();
       }
-    } catch (err) { console.error(err); }
+    } catch (err) { }
   };
 
   const handleEditSubmit = async (e: React.FormEvent) => {
@@ -151,7 +151,7 @@ export default function MemberDirectoryPage() {
     if (!editMember) return;
     setIsSaving(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/members/${editMember.memberId}`, { // <-- Diperbarui
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/members/${editMember.memberId}`, { 
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${getToken()}` },
         body: JSON.stringify(editMember)
@@ -160,7 +160,7 @@ export default function MemberDirectoryPage() {
         setEditMember(null);
         fetchMembers();
       }
-    } catch (err) { console.error(err); } 
+    } catch (err) { } 
     finally { setIsSaving(false); }
   };
 
@@ -323,7 +323,7 @@ export default function MemberDirectoryPage() {
                 <tr><td colSpan={9} className="py-20 text-center text-text-muted">{t("no_data")}</td></tr>
               ) : (
                 members.map((m, idx) => (
-                  <tr key={m.memberId} className="hover:bg-background/40 transition-colors text-sm"> {/* <-- Diperbarui */}
+                  <tr key={m.memberId} className="hover:bg-background/40 transition-colors text-sm"> 
                     <td className="py-4 px-4 text-text-muted font-mono">{(page - 1) * limit + idx + 1}</td>
                     <td className="py-4 px-4 text-foreground">{m.name}</td>
                     <td className="py-4 px-4 text-text-muted">{m.dateOfBirth || "-"}</td>
@@ -340,7 +340,7 @@ export default function MemberDirectoryPage() {
                       <div className="flex justify-center gap-1">
                         <button onClick={() => setViewMember(m)} className="p-2 text-foreground hover:bg-border/50 rounded-lg transition-colors cursor-pointer"><Eye size={16} /></button>
                         <button onClick={() => setEditMember(m)} className="p-2 text-blue-500 hover:bg-blue-500/10 rounded-lg transition-colors cursor-pointer"><Edit2 size={16} /></button>
-                        <button onClick={() => setDeleteId(m.memberId)} className="p-2 text-red-500 hover:bg-red-500/10 rounded-lg transition-colors cursor-pointer"><Trash2 size={16} /></button> {/* <-- Diperbarui */}
+                        <button onClick={() => setDeleteId(m.memberId)} className="p-2 text-red-500 hover:bg-red-500/10 rounded-lg transition-colors cursor-pointer"><Trash2 size={16} /></button> 
                       </div>
                     </td>
                   </tr>
@@ -353,10 +353,10 @@ export default function MemberDirectoryPage() {
         <div className="p-4 border-t border-border/60 bg-background/50 flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-4">
             <p className="text-xs text-text-muted pr-4 border-r border-border/60">
-              {t("total")}<span className="font-bold text-foreground pl-1">{totalItems}</span>
+              {tCommon("total")}<span className="font-bold text-foreground pl-1">{totalItems}</span>
             </p>
             <div className="flex items-center gap-2">
-              <p className="text-xs text-text-muted">{t("rows_per_page")}:</p>
+              <p className="text-xs text-text-muted">{tCommon("rows_per_page")}:</p>
               <div className="relative">
                 <select 
                   value={limit} 
@@ -399,7 +399,7 @@ export default function MemberDirectoryPage() {
               <div>
                 <h4 className="text-sm font-bold mb-3 uppercase tracking-wider text-center text-foreground">{t("detail_info")}</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-bg-alt p-4 rounded-lg border border-border/50">
-                  <div><p className="text-xs text-text-muted">{t("table.id")}</p><p className="text-sm text-foreground">{viewMember.memberId}</p></div> {/* <-- Diperbarui */}
+                  <div><p className="text-xs text-text-muted">{t("table.id")}</p><p className="text-sm text-foreground">{viewMember.memberId}</p></div> 
                   <div><p className="text-xs text-text-muted">{t("table.name")}</p><p className="text-sm text-foreground">{viewMember.name}</p></div>
                   <div><p className="text-xs text-text-muted">{t("table.email")}</p><p className="text-sm text-foreground">{viewMember.email || "-"}</p></div>
                   <div><p className="text-xs text-text-muted">{t("table.phone")}</p><p className="text-sm text-foreground">{viewMember.phone || "-"}</p></div>

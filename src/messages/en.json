@@ -1,4 +1,8 @@
 {
+  "Common": {
+    "total": "Total: ",
+    "rows_per_page": "Rows per page"
+  },
   "HomePage": {
     "title": "COMA",
     "subtitle": "Church Operations Management App",
@@ -172,8 +176,6 @@
         "address": "Address",
         "action": "Action"
       },
-      "rows_per_page": "Rows per page",
-      "total": "Total: ",
       "loading": "Loading member data...",
       "no_data": "No members found.",
       "delete_confirm_title": "Confirm Delete",
@@ -194,6 +196,26 @@
       "all_genders": "All Genders",
       "all_marriage": "All Status",
       "all_roles": "All Roles"
+    },
+    "birthday": {
+      "title": "Member Birthdays",
+      "description": "View upcoming birthdays and send personalized greetings to members.",
+      "search_placeholder": "Search member by name...",
+      "no_data": "No members found.",
+      "table": {
+        "no": "No",
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone",
+        "dob": "Date of Birth",
+        "gender": "Gender",
+        "action": "Action"
+      },
+      "modal_title": "Generate Birthday Greeting",
+      "modal_desc": "Customize and send a birthday greeting to",
+      "btn_copy": "Copy Text",
+      "btn_copied": "Copied!",
+      "btn_whatsapp": "Send via WhatsApp"
     }
   }
 }
