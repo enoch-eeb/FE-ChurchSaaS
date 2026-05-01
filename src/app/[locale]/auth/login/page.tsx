@@ -26,7 +26,7 @@ export default function LoginPage() {
     const payload = Object.fromEntries(formData);
 
     try {
-      // Menggunakan rute proxy API Next.js agar cookie httpOnly bisa terpasang
+      //menggunakan rute proxy api next.js agar cookie httponly bisa terpasang
       const res = await fetch(`/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -36,11 +36,15 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.message || "Gagal login");
+        throw new Error(data.message || "gagal login");
       }
 
-      // Token sekarang dikelola oleh API Proxy via httpOnly cookie untuk keamanan Web3 yang lebih baik
-      router.push(`/${locale}/managements/member-managements/directory`);
+      //simpan token atau penanda ke localstorage agar state isloggedin di homepage berubah
+      //token sekarang dikelola oleh api proxy via httponly cookie untuk keamanan web3 yang lebih baik
+      localStorage.setItem("token", data.token || "active");
+
+      //redirect ke halaman utama
+      router.push(`/${locale}`);
       router.refresh();
     } catch (err: any) {
       setError(err.message);
@@ -51,13 +55,13 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background transition-colors duration-300">
-      {/* TOP HEADER */}
+      {/*top header*/}
       <header className="flex justify-end items-center p-6 px-8 gap-4">
         <LocaleToggle />
         <ThemeToggle />
       </header>
 
-      {/* KONTEN LOGIN */}
+      {/*konten login*/}
       <div className="flex-1 flex items-center justify-center p-4 pb-20">
         <div className="w-full max-w-md p-8 bg-bg-alt border border-border/60 rounded-lg shadow-xl">
           <div className="text-center mb-8">
@@ -134,7 +138,7 @@ export default function LoginPage() {
             </button>
           </form>
 
-          {/* Bagian register sudah dihapus sesuai instruksi */}
+          {/*bagian register sudah dihapus sesuai instruksi*/}
           <div className="mt-8 pt-6 border-t border-border/40 text-center">
             <p className="text-xs text-text-muted">
               &copy; {new Date().getFullYear()} COMA Ecosystem. All rights reserved.

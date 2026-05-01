@@ -4,9 +4,16 @@
     "rows_per_page": "Baris per halaman"
   },
   "HomePage": {
-    "title": "COMA",
-    "subtitle": "Aplikasi Manajemen Operasional Gereja",
+    "title": "SIMAGE",
+    "subtitle": "Sistem Management Gereja",
     "description": "Ekosistem digital terpusat untuk mengelola operasional gereja dengan mudah, transparan, dan terukur.",
+    "hero_badge": "Solusi Digital untuk Gereja Modern",
+    "nav_login": "Masuk",
+    "nav_request": "Request Akses",
+    "cta_request": "Request Akses Sekarang",
+    "cta_login": "Masuk ke Dashboard",
+    "cta_note": "Sudah terdaftar? Hubungi tim kami di ",
+    "modules_section_label": "Fitur Lengkap yang Tersedia",
     "modules": {
       "app": {
         "title": "Manajemen Aplikasi",
