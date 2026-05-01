@@ -1,6 +1,6 @@
 {
   "Common": {
-    "total": "Total: ",
+    "total": "Total:",
     "rows_per_page": "Rows per page"
   },
   "HomePage": {
@@ -223,6 +223,57 @@
       "btn_copy": "Copy Text",
       "btn_copied": "Copied!",
       "btn_whatsapp": "Send via WhatsApp"
+    }
+  },
+  "InventoryManagementsPage": {
+    "title": "Inventory Management",
+    "description": "Central hub for managing church assets, equipment conditions, and storage locations.",
+    "menus": {
+      "inventory-list": {
+        "title": "Inventory List",
+        "desc": "View, add, edit, and delete all church inventory items in one place."
+      },
+      "inventory-category": {
+        "title": "Category Management",
+        "desc": "Organize inventory by category for easier filtering and reporting."
+      },
+      "inventory-location": {
+        "title": "Location Management",
+        "desc": "Manage storage locations and track where each item is kept."
+      },
+      "inventory-report": {
+        "title": "Inventory Report",
+        "desc": "Generate condition reports and monitor asset health across all locations."
+      }
+    },
+    "list": {
+      "title": "Inventory List",
+      "description": "Manage all church equipment and assets in one place.",
+      "btn_add": "Add Item",
+      "search_placeholder": "Search by item name or category...",
+      "filter_title": "Advanced Filters",
+      "filter_apply": "Apply",
+      "filter_reset": "Reset",
+      "all_conditions": "All Conditions",
+      "no_data": "No inventory items found.",
+      "table": {
+        "no": "No",
+        "id": "ID",
+        "item_name": "Item Name",
+        "category": "Category",
+        "quantity": "Quantity",
+        "condition": "Condition",
+        "location": "Location",
+        "action": "Action"
+      },
+      "add_title": "Add New Item",
+      "edit_title": "Edit Item",
+      "view_detail": "Item Detail",
+      "btn_save": "Save",
+      "btn_cancel": "Cancel",
+      "btn_delete": "Delete",
+      "delete_confirm_title": "Delete Item",
+      "delete_confirm_desc": "Are you sure you want to delete this item? This action cannot be undone."
     }
   }
 }
