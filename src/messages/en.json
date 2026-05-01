@@ -4,9 +4,16 @@
     "rows_per_page": "Rows per page"
   },
   "HomePage": {
-    "title": "COMA",
-    "subtitle": "Church Operations Management App",
+    "title": "SIMAGE",
+    "subtitle": "Church Management System",
     "description": "A centralized digital ecosystem to manage church operations easily, transparently, and measurably.",
+    "hero_badge": "Digital Solution for the Modern Church",
+    "nav_login": "Sign In",
+    "nav_request": "Request Access",
+    "cta_request": "Request Access Now",
+    "cta_login": "Go to Dashboard",
+    "cta_note": "Already registered? Reach our team at ",
+    "modules_section_label": "All Available Modules",
     "modules": {
       "app": {
         "title": "App Management",

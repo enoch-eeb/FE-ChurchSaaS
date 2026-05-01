@@ -5,7 +5,12 @@ import { useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { CircleUser, LogOut } from "lucide-react";
 
-export function ProfileDropdown() {
+//tambahkaninterfaceuntukmenerimapropsdariluar
+interface ProfileDropdownProps {
+  onLogout?: () => void;
+}
+
+export function ProfileDropdown({ onLogout }: ProfileDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   
@@ -24,21 +29,29 @@ export function ProfileDropdown() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleLogout = async () => {
-    setIsLoading(true);
-    try {
-      const res = await fetch("/api/auth/logout", {
-        method: "POST",
-      });
+  const handleCustomLogout = async () => {
+    //jikadipanggildarihomepagemakaserahkanprosesnyakesana
+    if (onLogout) {
+      onLogout();
+    } else {
+      //inilogikabawaanjikatidakadaprops
+      setIsLoading(true);
+      try {
+        const res = await fetch("/api/auth/logout", {
+          method: "POST",
+        });
 
-      if (res.ok) {
-        router.push(`/${locale}/auth/login`); 
-        router.refresh();
+        if (res.ok) {
+          //janganlupahapusjugadarilocalstorage
+          localStorage.removeItem("token");
+          router.push(`/${locale}/auth/login`); 
+          router.refresh();
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
       }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -62,7 +75,7 @@ export function ProfileDropdown() {
 
           <div className="py-1">
             <button
-              onClick={handleLogout}
+              onClick={handleCustomLogout}
               disabled={isLoading}
               className="w-full text-left px-4 py-2.5 text-sm text-red-500 hover:bg-red-500/10 transition-colors disabled:opacity-50 cursor-pointer flex items-center gap-2 font-medium"
             >

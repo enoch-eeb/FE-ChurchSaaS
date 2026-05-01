@@ -12,3 +12,8 @@ export const MEMBER_SIDEBAR_MENUS: MenuItem[] = [
   { title: "Member Birthday", href: "/managements/member-managements/member-birthday" },
   { title: "Documents", href: "/managements/member-managements/document" },
 ];
+
+export const INVENTORY_SIDEBAR_MENUS: MenuItem[] = [
+  { title: "Dashboard", href: "/managements/inventory-managements" },
+  { title: "Daftar Inventaris", href: "/managements/inventory-managements/inventory-list" },
+];
