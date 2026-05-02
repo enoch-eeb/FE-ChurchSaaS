@@ -1,23 +1,23 @@
 {
   "Common": {
-    "total": "Total: ",
+    "total": "Total:",
     "rows_per_page": "Baris per halaman"
   },
   "HomePage": {
     "title": "SIMAGE",
-    "subtitle": "Sistem Management Gereja",
+    "subtitle": "Sistem Manajemen Gereja",
     "description": "Ekosistem digital terpusat untuk mengelola operasional gereja dengan mudah, transparan, dan terukur.",
     "hero_badge": "Solusi Digital untuk Gereja Modern",
     "nav_login": "Masuk",
-    "nav_request": "Request Akses",
-    "cta_request": "Request Akses Sekarang",
-    "cta_login": "Masuk ke Dashboard",
+    "nav_request": "Minta Akses",
+    "cta_request": "Minta Akses Sekarang",
+    "cta_login": "Buka Dasbor",
     "cta_note": "Sudah terdaftar? Hubungi tim kami di ",
-    "modules_section_label": "Fitur Lengkap yang Tersedia",
+    "modules_section_label": "Semua Modul Tersedia",
     "modules": {
       "app": {
         "title": "Manajemen Aplikasi",
-        "desc": "Kelola pengaturan inti aplikasi, peran pengguna, izin, dan informasi profil gereja."
+        "desc": "Kelola pengaturan utama aplikasi, peran pengguna, izin, dan informasi profil gereja."
       },
       "member": {
         "title": "Manajemen Jemaat",
@@ -25,23 +25,23 @@
       },
       "finance": {
         "title": "Manajemen Keuangan",
-        "desc": "Sistem pencatatan perpuluhan otomatis, manajemen pengeluaran, dan pelaporan keuangan gereja."
+        "desc": "Sistem pencatatan perpuluhan otomatis, pengelolaan pengeluaran, dan pelaporan keuangan gereja."
       },
       "inventory": {
         "title": "Manajemen Inventaris",
-        "desc": "Pantau inventaris aset gereja, jadwal pemeliharaan fasilitas, dan sistem peminjaman barang."
+        "desc": "Pantau inventaris aset gereja, jadwal perawatan fasilitas, dan sistem peminjaman barang."
       },
       "service": {
         "title": "Manajemen Ibadah",
-        "desc": "Jadwalkan ibadah mingguan, tugaskan pelayan/relawan, dan atur rencana tata ibadah."
+        "desc": "Jadwalkan ibadah mingguan, tugaskan relawan pelayanan, dan atur rencana penyembahan."
       },
       "event": {
         "title": "Manajemen Acara",
-        "desc": "Sistem registrasi untuk acara khusus, kelas pemuridan, retret, dan pemesanan tiket."
+        "desc": "Sistem pendaftaran untuk acara khusus, kelas pemuridan, retret, dan pemesanan tiket."
       }
     },
     "footer_quote": "\"Sebab di mana dua atau tiga orang berkumpul dalam nama-Ku, di situ Aku ada di tengah-tengah mereka.\"",
-    "footer_est": "Est. 2026 • Soli Deo Gloria"
+    "footer_est": "Berdiri sejak 2026 • Soli Deo Gloria"
   },
   "Auth": {
     "login_title": "Masuk ke COMA",
@@ -58,18 +58,38 @@
     "forgot_password_title": "Lupa Kata Sandi?",
     "forgot_password_subtitle": "Masukkan email Anda dan kami akan mengirimkan tautan untuk mengatur ulang kata sandi Anda.",
     "send_reset_link": "Kirim Tautan Reset",
-    "back_to_login": "Kembali ke Login",
+    "back_to_login": "Kembali ke Halaman Masuk",
     "reset_password_title": "Buat Kata Sandi Baru",
     "reset_password_subtitle": "Silakan masukkan kata sandi baru Anda di bawah ini.",
     "new_password": "Kata Sandi Baru",
     "confirm_password": "Konfirmasi Kata Sandi",
     "btn_reset_password": "Simpan Kata Sandi Baru"
   },
+  "Sidebar": {
+    "back_to_home": "Kembali ke Beranda",
+    "sections": {
+      "member_management": "Manajemen Jemaat",
+      "inventory_management": "Manajemen Inventaris"
+    },
+    "menus": {
+      "member_dashboard": "Dasbor",
+      "member_directory": "Direktori Jemaat",
+      "member_attendance": "Kehadiran Jemaat",
+      "member_structure": "Struktur",
+      "member_birthday": "Ulang Tahun Jemaat",
+      "member_document": "Dokumen",
+      "inventory_dashboard": "Dasbor",
+      "inventory_list": "Daftar Inventaris",
+      "inventory_category": "Manajemen Kategori",
+      "inventory_location": "Manajemen Lokasi",
+      "inventory_report": "Laporan Inventaris"
+    }
+  },
   "MemberManagementsPage": {
     "title": "Manajemen Jemaat",
-    "description": "Pusat komando untuk mengelola data jemaat, kehadiran, dan struktur organisasi gereja.",
+    "description": "Pusat kendali untuk mengelola data jemaat, absensi, dan struktur organisasi gereja.",
     "menus": {
-      "directory": {
+      "member-directory": {
         "title": "Direktori Jemaat",
         "desc": "Tambah, edit, hapus, dan kelola seluruh basis data jemaat."
       },
@@ -80,6 +100,10 @@
       "structure": {
         "title": "Manajemen Struktur",
         "desc": "Atur posisi, peran pelayanan, dan hierarki organisasi gereja."
+      },
+      "member-birthday": {
+        "title": "Ulang Tahun Jemaat",
+        "desc": "Lihat ulang tahun jemaat dan kirimkan ucapan personal."
       }
     },
     "AttendancePage": {
@@ -91,7 +115,7 @@
       "noEventWarning": "Sistem terkunci. Pilih atau buat Sesi Acara untuk memulai absensi.",
       "tabs": {
         "attendance": "Kehadiran",
-        "followup": "Follow-up",
+        "followup": "Tindak Lanjut",
         "analysis": "Analisis"
       },
       "attendance": {
@@ -111,14 +135,14 @@
         }
       },
       "followup": {
-        "title": "Jemaat Perlu Follow-up",
-        "description": "Tidak hadir 3 kali atau lebih berturut-turut dalam semua sesi yang tercatat.",
+        "title": "Jemaat Butuh Tindak Lanjut",
+        "description": "Absen 3 kali berturut-turut atau lebih dalam semua sesi tercatat.",
         "badge": "{count} jemaat",
         "loading": "Memuat data jemaat...",
         "notEnoughData": "Data Tidak Cukup",
-        "notEnoughDataDesc": "Minimal 3 sesi acara diperlukan untuk laporan follow-up.",
+        "notEnoughDataDesc": "Dibutuhkan setidaknya 3 sesi acara untuk laporan tindak lanjut.",
         "allActive": "Semua jemaat aktif!",
-        "allActiveDesc": "Tidak ada jemaat yang perlu di-follow-up saat ini.",
+        "allActiveDesc": "Tidak ada jemaat yang butuh tindak lanjut saat ini.",
         "absences": "Ketidakhadiran",
         "whatsapp": "WhatsApp"
       },
@@ -127,7 +151,7 @@
           "totalSessions": "Total Sesi",
           "totalMembers": "Total Jemaat",
           "presentThisSession": "Hadir Sesi Ini",
-          "needFollowup": "Perlu Follow-up"
+          "needFollowup": "Butuh Tindak Lanjut"
         },
         "perSession": {
           "title": "Kehadiran Per Sesi",
@@ -147,7 +171,7 @@
       "modal": {
         "title": "Buat Sesi Acara Baru",
         "label": "Nama Sesi / Ibadah",
-        "placeholder": "cth., Ibadah Minggu - 26 April 2026",
+        "placeholder": "mis. Ibadah Raya Minggu - 26 Apr 2026",
         "submit": "Simpan & Mulai Absensi"
       },
       "csv": {
@@ -163,7 +187,7 @@
     },
     "directory": {
       "title": "Direktori Jemaat",
-      "description": "Kelola semua data jemaat gereja dalam satu tempat.",
+      "description": "Kelola seluruh data jemaat gereja di satu tempat.",
       "btn_add": "Tambah Jemaat",
       "search_placeholder": "Cari jemaat berdasarkan nama atau telepon...",
       "table": {
@@ -197,7 +221,7 @@
       "btn_save": "Simpan Perubahan",
       "filter_title": "Filter Lanjutan",
       "filter_apply": "Terapkan Filter",
-      "filter_reset": "Reset",
+      "filter_reset": "Atur Ulang",
       "filter_dob_start": "Tanggal Lahir (Mulai)",
       "filter_dob_end": "Tanggal Lahir (Akhir)",
       "all_genders": "Semua Jenis Kelamin",
@@ -206,7 +230,7 @@
     },
     "birthday": {
       "title": "Ulang Tahun Jemaat",
-      "description": "Lihat ulang tahun yang akan datang dan kirim ucapan personal kepada jemaat.",
+      "description": "Lihat daftar ulang tahun yang akan datang dan kirimkan ucapan personal kepada jemaat.",
       "search_placeholder": "Cari jemaat berdasarkan nama...",
       "no_data": "Tidak ada jemaat ditemukan.",
       "table": {
@@ -219,7 +243,7 @@
         "action": "Aksi"
       },
       "modal_title": "Buat Ucapan Ulang Tahun",
-      "modal_desc": "Kustomisasi dan kirim ucapan ulang tahun kepada",
+      "modal_desc": "Sesuaikan dan kirim ucapan ulang tahun kepada",
       "btn_copy": "Salin Teks",
       "btn_copied": "Tersalin!",
       "btn_whatsapp": "Kirim via WhatsApp"
@@ -227,15 +251,15 @@
   },
   "InventoryManagementsPage": {
     "title": "Manajemen Inventaris",
-    "description": "Pusat pengelolaan aset gereja, kondisi peralatan, dan lokasi penyimpanan.",
+    "description": "Pusat utama untuk mengelola aset gereja, kondisi peralatan, dan lokasi penyimpanan.",
     "menus": {
       "inventory-list": {
         "title": "Daftar Inventaris",
-        "desc": "Lihat, tambah, edit, dan hapus semua item inventaris gereja dalam satu tempat."
+        "desc": "Lihat, tambah, edit, dan hapus semua item inventaris gereja di satu tempat."
       },
       "inventory-category": {
         "title": "Manajemen Kategori",
-        "desc": "Atur inventaris berdasarkan kategori untuk memudahkan filter dan pelaporan."
+        "desc": "Atur inventaris berdasarkan kategori untuk memudahkan penyaringan dan pelaporan."
       },
       "inventory-location": {
         "title": "Manajemen Lokasi",
@@ -248,32 +272,32 @@
     },
     "list": {
       "title": "Daftar Inventaris",
-      "description": "Kelola semua peralatan dan aset gereja dalam satu tempat.",
-      "btn_add": "Tambah Item",
+      "description": "Kelola semua peralatan dan aset gereja di satu tempat.",
+      "btn_add": "Tambah Barang",
       "search_placeholder": "Cari berdasarkan nama barang atau kategori...",
       "filter_title": "Filter Lanjutan",
       "filter_apply": "Terapkan",
-      "filter_reset": "Reset",
+      "filter_reset": "Atur Ulang",
       "all_conditions": "Semua Kondisi",
-      "no_data": "Tidak ada item inventaris ditemukan.",
+      "no_data": "Tidak ada barang inventaris ditemukan.",
       "table": {
         "no": "No",
         "id": "ID",
         "item_name": "Nama Barang",
         "category": "Kategori",
-        "quantity": "Jumlah",
+        "quantity": "Kuantitas",
         "condition": "Kondisi",
         "location": "Lokasi",
         "action": "Aksi"
       },
-      "add_title": "Tambah Item Baru",
-      "edit_title": "Edit Item",
-      "view_detail": "Detail Item",
+      "add_title": "Tambah Barang Baru",
+      "edit_title": "Edit Barang",
+      "view_detail": "Detail Barang",
       "btn_save": "Simpan",
       "btn_cancel": "Batal",
       "btn_delete": "Hapus",
-      "delete_confirm_title": "Hapus Item",
-      "delete_confirm_desc": "Apakah Anda yakin ingin menghapus item ini? Tindakan ini tidak dapat dibatalkan."
+      "delete_confirm_title": "Hapus Barang",
+      "delete_confirm_desc": "Apakah Anda yakin ingin menghapus barang ini? Tindakan ini tidak dapat dibatalkan."
     }
   }
 }
