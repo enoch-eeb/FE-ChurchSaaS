@@ -16,4 +16,7 @@ export const MEMBER_SIDEBAR_MENUS: MenuItem[] = [
 export const INVENTORY_SIDEBAR_MENUS: MenuItem[] = [
   { title: "Dashboard", href: "/managements/inventory-managements" },
   { title: "Daftar Inventaris", href: "/managements/inventory-managements/inventory-list" },
+  { title: "Manajemen Kategori", href: "/managements/inventory-managements/inventory-category" },
+  { title: "Manajemen Lokasi", href: "/managements/inventory-managements/inventory-location" }, 
+  { title: "Laporan Inventaris", href: "/managements/inventory-managements/inventory-report" },
 ];

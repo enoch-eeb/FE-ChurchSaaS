@@ -100,7 +100,7 @@
         "exportCsv": "Ekspor CSV",
         "loading": "Memuat data...",
         "empty": "Belum ada data jemaat.",
-        "emptySearch": "Tidak ada hasil yang ditemukan untuk \"{query}\"",
+        "emptySearch": "Tidak ada hasil untuk \"{query}\"",
         "alreadyPresent": "Hadir",
         "markPresent": "Tandai Hadir",
         "table": {
@@ -112,14 +112,14 @@
       },
       "followup": {
         "title": "Jemaat Perlu Follow-up",
-        "description": "Absen 3 kali atau lebih berturut-turut di semua sesi yang tercatat.",
+        "description": "Tidak hadir 3 kali atau lebih berturut-turut dalam semua sesi yang tercatat.",
         "badge": "{count} jemaat",
         "loading": "Memuat data jemaat...",
         "notEnoughData": "Data Tidak Cukup",
-        "notEnoughDataDesc": "Diperlukan setidaknya 3 sesi acara untuk laporan follow-up.",
+        "notEnoughDataDesc": "Minimal 3 sesi acara diperlukan untuk laporan follow-up.",
         "allActive": "Semua jemaat aktif!",
-        "allActiveDesc": "Tidak ada jemaat yang membutuhkan follow-up saat ini.",
-        "absences": "Absen",
+        "allActiveDesc": "Tidak ada jemaat yang perlu di-follow-up saat ini.",
+        "absences": "Ketidakhadiran",
         "whatsapp": "WhatsApp"
       },
       "analysis": {
@@ -131,7 +131,7 @@
         },
         "perSession": {
           "title": "Kehadiran Per Sesi",
-          "description": "Jumlah hadirin dari setiap sesi acara.",
+          "description": "Jumlah peserta dari setiap sesi acara.",
           "empty": "Belum ada sesi acara.",
           "present": "hadir"
         },
@@ -147,7 +147,7 @@
       "modal": {
         "title": "Buat Sesi Acara Baru",
         "label": "Nama Sesi / Ibadah",
-        "placeholder": "mis., Ibadah Raya - 26 April 2026",
+        "placeholder": "cth., Ibadah Minggu - 26 April 2026",
         "submit": "Simpan & Mulai Absensi"
       },
       "csv": {
@@ -158,7 +158,7 @@
         "phone": "Nomor Telepon",
         "status": "Status",
         "present": "Hadir",
-        "absent": "Absen"
+        "absent": "Tidak Hadir"
       }
     },
     "directory": {
@@ -197,16 +197,16 @@
       "btn_save": "Simpan Perubahan",
       "filter_title": "Filter Lanjutan",
       "filter_apply": "Terapkan Filter",
-      "filter_reset": "Atur Ulang",
+      "filter_reset": "Reset",
       "filter_dob_start": "Tanggal Lahir (Mulai)",
       "filter_dob_end": "Tanggal Lahir (Akhir)",
-      "all_genders": "Semua Gender",
+      "all_genders": "Semua Jenis Kelamin",
       "all_marriage": "Semua Status",
       "all_roles": "Semua Peran"
     },
     "birthday": {
       "title": "Ulang Tahun Jemaat",
-      "description": "Lihat ulang tahun jemaat yang akan datang dan kirimkan ucapan personal.",
+      "description": "Lihat ulang tahun yang akan datang dan kirim ucapan personal kepada jemaat.",
       "search_placeholder": "Cari jemaat berdasarkan nama...",
       "no_data": "Tidak ada jemaat ditemukan.",
       "table": {
@@ -219,10 +219,61 @@
         "action": "Aksi"
       },
       "modal_title": "Buat Ucapan Ulang Tahun",
-      "modal_desc": "Sesuaikan dan kirim ucapan ulang tahun untuk",
+      "modal_desc": "Kustomisasi dan kirim ucapan ulang tahun kepada",
       "btn_copy": "Salin Teks",
       "btn_copied": "Tersalin!",
       "btn_whatsapp": "Kirim via WhatsApp"
+    }
+  },
+  "InventoryManagementsPage": {
+    "title": "Manajemen Inventaris",
+    "description": "Pusat pengelolaan aset gereja, kondisi peralatan, dan lokasi penyimpanan.",
+    "menus": {
+      "inventory-list": {
+        "title": "Daftar Inventaris",
+        "desc": "Lihat, tambah, edit, dan hapus semua item inventaris gereja dalam satu tempat."
+      },
+      "inventory-category": {
+        "title": "Manajemen Kategori",
+        "desc": "Atur inventaris berdasarkan kategori untuk memudahkan filter dan pelaporan."
+      },
+      "inventory-location": {
+        "title": "Manajemen Lokasi",
+        "desc": "Kelola lokasi penyimpanan dan lacak di mana setiap barang disimpan."
+      },
+      "inventory-report": {
+        "title": "Laporan Inventaris",
+        "desc": "Buat laporan kondisi dan pantau kesehatan aset di semua lokasi."
+      }
+    },
+    "list": {
+      "title": "Daftar Inventaris",
+      "description": "Kelola semua peralatan dan aset gereja dalam satu tempat.",
+      "btn_add": "Tambah Item",
+      "search_placeholder": "Cari berdasarkan nama barang atau kategori...",
+      "filter_title": "Filter Lanjutan",
+      "filter_apply": "Terapkan",
+      "filter_reset": "Reset",
+      "all_conditions": "Semua Kondisi",
+      "no_data": "Tidak ada item inventaris ditemukan.",
+      "table": {
+        "no": "No",
+        "id": "ID",
+        "item_name": "Nama Barang",
+        "category": "Kategori",
+        "quantity": "Jumlah",
+        "condition": "Kondisi",
+        "location": "Lokasi",
+        "action": "Aksi"
+      },
+      "add_title": "Tambah Item Baru",
+      "edit_title": "Edit Item",
+      "view_detail": "Detail Item",
+      "btn_save": "Simpan",
+      "btn_cancel": "Batal",
+      "btn_delete": "Hapus",
+      "delete_confirm_title": "Hapus Item",
+      "delete_confirm_desc": "Apakah Anda yakin ingin menghapus item ini? Tindakan ini tidak dapat dibatalkan."
     }
   }
 }
