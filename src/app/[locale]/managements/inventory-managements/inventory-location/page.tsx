@@ -727,7 +727,6 @@ export default function InventoryLocationPage() {
           </div>
         </div>
       )}
-
     </div>
   );
 }

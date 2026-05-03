@@ -275,5 +275,69 @@
       "delete_confirm_title": "Delete Item",
       "delete_confirm_desc": "Are you sure you want to delete this item? This action cannot be undone."
     }
+  },
+  "InventoryCategoryPage": {
+    "title": "Category Management",
+    "description": "Organize inventory items by category for easier filtering and reporting.",
+    "btn_add": "Add Category",
+    "search_placeholder": "Search by category name...",
+    "add_title": "Add New Category",
+    "edit_title": "Edit Category",
+    "btn_save": "Save",
+    "btn_cancel": "Cancel",
+    "btn_delete": "Delete",
+    "delete_confirm_title": "Delete Category",
+    "delete_confirm_desc": "Are you sure you want to delete this category? This action cannot be undone.",
+    "table": {
+      "no": "No",
+      "name": "Category Name",
+      "description": "Description",
+      "item_count": "Item Count",
+      "action": "Action"
+    }
+  },
+  "InventoryLocationPage": {
+    "title": "Location Management",
+    "description": "Manage storage locations and track where each inventory item is kept.",
+    "btn_add": "Add Location",
+    "search_placeholder": "Search by location name or building...",
+    "add_title": "Add New Location",
+    "edit_title": "Edit Location",
+    "btn_save": "Save",
+    "btn_cancel": "Cancel",
+    "btn_delete": "Delete",
+    "delete_confirm_title": "Delete Location",
+    "delete_confirm_desc": "Are you sure you want to delete this location? This action cannot be undone.",
+    "table": {
+      "no": "No",
+      "name": "Location Name",
+      "building": "Building",
+      "floor": "Floor",
+      "item_count": "Item Count",
+      "action": "Action"
+    }
+  },
+  "InventoryLoanPage": {
+    "title": "Inventory Loan",
+    "description": "Manage item borrowing records, track loan status, and monitor return schedules.",
+    "btn_add": "Add Loan",
+    "search_placeholder": "Search by borrower name or item...",
+    "add_title": "Add New Loan",
+    "edit_title": "Edit Loan",
+    "btn_save": "Save",
+    "btn_cancel": "Cancel",
+    "btn_delete": "Delete",
+    "delete_confirm_title": "Delete Loan Record",
+    "delete_confirm_desc": "Are you sure you want to delete this loan record? This action cannot be undone.",
+    "table": {
+      "no": "No",
+      "borrower": "Borrower",
+      "item": "Item",
+      "quantity": "Qty",
+      "loan_date": "Loan Date",
+      "return_date": "Return Date",
+      "status": "Status",
+      "action": "Action"
+    }
   }
 }

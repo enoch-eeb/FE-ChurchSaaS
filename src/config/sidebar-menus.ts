@@ -19,4 +19,5 @@ export const INVENTORY_SIDEBAR_MENUS: MenuItem[] = [
   { title: "Manajemen Kategori", href: "/managements/inventory-managements/inventory-category" },
   { title: "Manajemen Lokasi", href: "/managements/inventory-managements/inventory-location" }, 
   { title: "Laporan Inventaris", href: "/managements/inventory-managements/inventory-report" },
+  { title: "Inventory Loan", href: "/managements/inventory-managements/inventory-loan" },
 ];

@@ -275,5 +275,69 @@
       "delete_confirm_title": "Hapus Item",
       "delete_confirm_desc": "Apakah Anda yakin ingin menghapus item ini? Tindakan ini tidak dapat dibatalkan."
     }
+  },
+  "InventoryCategoryPage": {
+    "title": "Manajemen Kategori",
+    "description": "Atur item inventaris berdasarkan kategori untuk memudahkan filter dan pelaporan.",
+    "btn_add": "Tambah Kategori",
+    "search_placeholder": "Cari berdasarkan nama kategori...",
+    "add_title": "Tambah Kategori Baru",
+    "edit_title": "Edit Kategori",
+    "btn_save": "Simpan",
+    "btn_cancel": "Batal",
+    "btn_delete": "Hapus",
+    "delete_confirm_title": "Hapus Kategori",
+    "delete_confirm_desc": "Apakah Anda yakin ingin menghapus kategori ini? Tindakan ini tidak dapat dibatalkan.",
+    "table": {
+      "no": "No",
+      "name": "Nama Kategori",
+      "description": "Deskripsi",
+      "item_count": "Jumlah Item",
+      "action": "Aksi"
+    }
+  },
+  "InventoryLocationPage": {
+    "title": "Manajemen Lokasi",
+    "description": "Kelola lokasi penyimpanan dan lacak di mana setiap item inventaris disimpan.",
+    "btn_add": "Tambah Lokasi",
+    "search_placeholder": "Cari berdasarkan nama lokasi atau gedung...",
+    "add_title": "Tambah Lokasi Baru",
+    "edit_title": "Edit Lokasi",
+    "btn_save": "Simpan",
+    "btn_cancel": "Batal",
+    "btn_delete": "Hapus",
+    "delete_confirm_title": "Hapus Lokasi",
+    "delete_confirm_desc": "Apakah Anda yakin ingin menghapus lokasi ini? Tindakan ini tidak dapat dibatalkan.",
+    "table": {
+      "no": "No",
+      "name": "Nama Lokasi",
+      "building": "Gedung",
+      "floor": "Lantai",
+      "item_count": "Jumlah Item",
+      "action": "Aksi"
+    }
+  },
+  "InventoryLoanPage": {
+    "title": "Peminjaman Inventaris",
+    "description": "Kelola catatan peminjaman barang, pantau status pinjaman, dan jadwal pengembalian.",
+    "btn_add": "Tambah Peminjaman",
+    "search_placeholder": "Cari berdasarkan nama peminjam atau barang...",
+    "add_title": "Tambah Peminjaman Baru",
+    "edit_title": "Edit Peminjaman",
+    "btn_save": "Simpan",
+    "btn_cancel": "Batal",
+    "btn_delete": "Hapus",
+    "delete_confirm_title": "Hapus Catatan Peminjaman",
+    "delete_confirm_desc": "Apakah Anda yakin ingin menghapus catatan peminjaman ini? Tindakan ini tidak dapat dibatalkan.",
+    "table": {
+      "no": "No",
+      "borrower": "Peminjam",
+      "item": "Barang",
+      "quantity": "Jml",
+      "loan_date": "Tgl Pinjam",
+      "return_date": "Tgl Kembali",
+      "status": "Status",
+      "action": "Aksi"
+    }
   }
 }
