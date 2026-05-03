@@ -65,11 +65,31 @@
     "confirm_password": "Confirm Password",
     "btn_reset_password": "Save New Password"
   },
+  "Sidebar": {
+    "back_to_home": "Back to Home",
+    "sections": {
+      "member_management": "Member Management",
+      "inventory_management": "Inventory Management"
+    },
+    "menus": {
+      "member_dashboard": "Dashboard",
+      "member_directory": "Member Directory",
+      "member_attendance": "Member Attendance",
+      "member_structure": "Structure",
+      "member_birthday": "Member Birthday",
+      "member_document": "Documents",
+      "inventory_dashboard": "Dashboard",
+      "inventory_list": "Inventory List",
+      "inventory_category": "Category Management",
+      "inventory_location": "Location Management",
+      "inventory_report": "Inventory Report"
+    }
+  },
   "MemberManagementsPage": {
     "title": "Member Management",
     "description": "Command center for managing congregation data, attendance, and church organizational structure.",
     "menus": {
-      "directory": {
+      "member-directory": {
         "title": "Member Directory",
         "desc": "Add, edit, delete, and manage the entire congregation database."
       },
@@ -80,6 +100,10 @@
       "structure": {
         "title": "Structure Management",
         "desc": "Set positions, ministry roles, and church organizational hierarchy."
+      },
+      "member-birthday": {
+        "title": "Member Birthdays",
+        "desc": "View upcoming birthdays and send personalized greetings."
       }
     },
     "AttendancePage": {

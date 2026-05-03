@@ -1,22 +1,34 @@
 export type MenuItem = {
-  title: string;
+  titleKey: string;
   href: string;
   icon?: string;
 };
 
-export const MEMBER_SIDEBAR_MENUS: MenuItem[] = [
-  { title: "Dashboard", href: "/managements/member-managements" },
-  { title: "Daftar Member", href: "/managements/member-managements/member-directory" },
-  { title: "Absen Member", href: "/managements/member-managements/member-attendance" },
-  { title: "Structure", href: "/managements/member-managements/structure" },
-  { title: "Member Birthday", href: "/managements/member-managements/member-birthday" },
-  { title: "Documents", href: "/managements/member-managements/document" },
-];
+export type MenuSection = {
+  sectionKey: string;
+  items: MenuItem[];
+};
 
-export const INVENTORY_SIDEBAR_MENUS: MenuItem[] = [
-  { title: "Dashboard", href: "/managements/inventory-managements" },
-  { title: "Daftar Inventaris", href: "/managements/inventory-managements/inventory-list" },
-  { title: "Manajemen Kategori", href: "/managements/inventory-managements/inventory-category" },
-  { title: "Manajemen Lokasi", href: "/managements/inventory-managements/inventory-location" }, 
-  { title: "Laporan Inventaris", href: "/managements/inventory-managements/inventory-report" },
+export const MAIN_SIDEBAR_MENUS: MenuSection[] = [
+  {
+    sectionKey: "member_management",
+    items: [
+      { titleKey: "member_dashboard", href: "/managements/member-managements" },
+      { titleKey: "member_directory", href: "/managements/member-managements/member-directory" },
+      { titleKey: "member_attendance", href: "/managements/member-managements/member-attendance" },
+      { titleKey: "member_structure", href: "/managements/member-managements/structure" },
+      { titleKey: "member_birthday", href: "/managements/member-managements/member-birthday" },
+      { titleKey: "member_document", href: "/managements/member-managements/document" },
+    ]
+  },
+  {
+    sectionKey: "inventory_management",
+    items: [
+      { titleKey: "inventory_dashboard", href: "/managements/inventory-managements" },
+      { titleKey: "inventory_list", href: "/managements/inventory-managements/inventory-list" },
+      { titleKey: "inventory_category", href: "/managements/inventory-managements/inventory-category" },
+      { titleKey: "inventory_location", href: "/managements/inventory-managements/inventory-location" }, 
+      { titleKey: "inventory_report", href: "/managements/inventory-managements/inventory-report" },
+    ]
+  },
 ];
